@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "objectivity-angular-schematic-web-setup-ts-import-path",
+    "title": "Improves long relative paths import",
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }
+      }
+    },
+    "required": []
+  }

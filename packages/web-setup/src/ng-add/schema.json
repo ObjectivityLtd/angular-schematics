@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "objectivity-angular-schematic-web-ci-ng-add",
+    "title": "Angular Material ng-add schematic",
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }
+      }
+    },
+    "required": []
+  }
