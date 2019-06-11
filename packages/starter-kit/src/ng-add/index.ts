@@ -11,28 +11,28 @@ export default function (options: Schema): Rule {
     let runPostInstallTask = false;
 
     if (options.uiFramework) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-ui-framework', '^0.0.0');
+      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-ui-framework', '^0');
       runInstallTask = true;
     }
 
     if (options.ci) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-web-ci', '^0.0.0');
+      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-web-ci', '^0');
       runInstallTask = true;
       runPostInstallTask = true;
     }
 
     if (options.ide) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-ide', '^0.0.0');
+      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-ide', '^0');
       runInstallTask = true;
     }
 
     if (options.setup) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-web-setup', '^0.0.0');
+      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-web-setup', '^0');
       runInstallTask = true;
     }
 
     if (options.appInsights) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-app-insights', '^0.0.0');
+      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-app-insights', '^0');
       runInstallTask = true;
     }
 
