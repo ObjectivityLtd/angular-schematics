@@ -28,5 +28,8 @@
     "@types/node": "^8.0.31",
     "jasmine": "^3.3.1",
     "typescript": "~3.4.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

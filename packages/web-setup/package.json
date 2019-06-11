@@ -30,5 +30,8 @@
     "jasmine": "^3.3.1",
     "schematics-utilities": "^1.1.2",
     "typescript": "~3.4.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
