@@ -1,4 +1,4 @@
-# Angular schematic web ci
+# Angular schematic ide
 
 Configures IDE, adds common extensions and configurations.
 
