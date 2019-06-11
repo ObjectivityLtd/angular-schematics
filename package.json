@@ -1,0 +1,40 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "commit": "npx git-cz",
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "release": "lerna publish",
+    "test": "lerna run test",
+    "clean": "lerna clean",
+    "clean:build": "lerna exec -- rimraf lib",
+    "ls": "lerna ls"    
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@angular-devkit/schematics-cli": "^0.800.1",
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^2.4.0",
+    "lerna": "^3.14.1",
+    "git-cz": "^3.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}
