@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.1](https://github.com/ObjectivityLtd/angular-schematics/compare/@objectivity/angular-schematic-app-insights@0.1.0-alpha.0...@objectivity/angular-schematic-app-insights@0.1.0-alpha.1) (2019-06-11)
+
+
+### Bug Fixes
+
+* update environment files ([7077e9c](https://github.com/ObjectivityLtd/angular-schematics/commit/7077e9c))
+
+
+
+
+
 # 0.1.0-alpha.0 (2019-06-11)
 
 
