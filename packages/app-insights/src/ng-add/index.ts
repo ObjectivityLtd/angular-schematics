@@ -30,7 +30,7 @@ function updateEnvironments(options: Schema): Rule {
       `    instrumentationKey: '${options.instrumentationKey}'\n` +
       `  }`;
 
-    updateEnvironmentConfiguration(options.project, insertion);
+    return updateEnvironmentConfiguration(options.project, insertion);
   };
 }
 
