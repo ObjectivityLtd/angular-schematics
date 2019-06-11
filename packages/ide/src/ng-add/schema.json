@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "objectivity-angular-schematic-ide-ng-add",
+    "title": "Configures IDE, adds common extensions and configurations",
+    "type": "object",
+    "properties": {
+      "vscode": {
+        "description": "Adds common extensions and configurations for VSCode",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to add common extensions and configurations for VSCode?",
+        "alias": "vsc"
+      }
+    },
+    "required": []
+  }

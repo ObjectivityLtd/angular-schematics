@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Configures IDE, adds common extensions and configurations.",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": ["install"]
+    },
+    "vscode": {
+      "description": "Adds common extensions and configurations for VSCode.",
+      "factory": "./vscode/index#vscode",
+      "schema": "./vscode/schema.json"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ng serve",
+            "url": "<%= serveProtocol %>://<%= serveDomain %>:<%= servePort %>",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ng test",
+            "url": "<%= testProtocol %>://<%= testDomain %>:<%= testPort %>/debug.html",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
