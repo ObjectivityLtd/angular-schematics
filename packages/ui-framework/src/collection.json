@@ -1,0 +1,21 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Adds configuration of UI framework.",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": ["install"]
+    },
+    "material": {
+      "description": "Adds Angular Material to the application without affecting any templates",
+      "factory": "./material/index#material",
+      "schema": "./material/schema.json"
+    },
+    "bootstrap-mini": {
+      "description": "Adds minimalistic version of Bootstrap",
+      "factory": "./bootstrap-mini/index#bootstrapMini",
+      "schema": "./bootstrap-mini/schema.json"
+    }    
+  }
+}

@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "objectiivty-material-ng-add",
+    "title": "Angular Material ng-add schematic",
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }
+      },
+      "material": {
+        "description": "When true, adds Angular Material to the application without affecting any templates",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to add Angular Material?",
+        "alias": "m"
+      },
+      "bootstrapMini": {
+        "description": "When true, adds minimalistic version of Bootstrap.",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to add minimalistic version of Bootstrap?",
+        "alias": "bm"
+      },
+      "skipInstall": {
+        "description": "When true, does not install dependency packages.",
+        "type": "boolean",
+        "default": false
+      }      
+    },
+    "required": []
+  }
