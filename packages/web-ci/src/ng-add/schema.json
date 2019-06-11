@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "objectivity-angular-schematic-web-ci-ng-add",
+    "title": "Angular Material ng-add schematic",
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }
+      },
+      "azureDevops": {
+        "description": "Adds Azure DevOps pipeline configuration to the application",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to add Azure DevOps pipeline configuration?",
+        "$id": "azureDevOps",
+        "alias": "azure"
+      },
+      "skipInstall": {
+        "description": "When true, does not install dependency packages.",
+        "type": "boolean",
+        "default": false,
+        "alias": "si"
+      }
+    },
+    "required": []
+  }

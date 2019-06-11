@@ -1,0 +1,72 @@
+name: 2.0.$(BuildID)
+
+trigger:
+- new-ui/develop
+
+pool:
+  name: Hosted VS2017
+  demands:
+  - msbuild
+  - visualstudio
+  - vstest
+
+steps:
+- task: Npm@1
+  displayName: 'Install dependencies'
+  inputs:
+    command: custom
+    workingDir: '<%= workingDir %>'
+    verbose: false
+    customCommand: ci
+
+- task: Npm@1
+  displayName: 'Build'
+  inputs:
+    command: custom
+    workingDir: '<%= workingDir %>'
+    verbose: false
+    customCommand: 'run build -- --prod --aot -vc -cc --buildOptimizer'
+
+- task: Npm@1
+  displayName: 'Run unit tests'
+  inputs:
+    command: custom
+    workingDir: '<%= workingDir %>' 
+    verbose: false
+    customCommand: 'run test -- --watch=false --code-coverage --no-progress'
+
+- task: PublishTestResults@2
+  displayName: 'Publish unit test results'
+  inputs:
+    testResultsFormat: JUnit
+    testResultsFiles: '**/TESTS-*.xml'
+    mergeTestResults: true
+    testRunTitle: 'wwwroot tests'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '<%= workingDir %>/coverage/<%= project %>/cobertura-coverage.xml'
+
+- task: Npm@1
+  displayName: 'Run lint'
+  inputs:
+    command: custom
+    workingDir: '<%= workingDir %>' 
+    verbose: false
+    customCommand: 'run lint'
+  continueOnError: true
+
+- task: ArchiveFiles@2
+  displayName: 'Archive'
+  inputs:
+    rootFolderOrFile: '<%= workingDir %>/dist/<%= project %>'
+    includeRootFolder: false
+    archiveFile: '$(Build.ArtifactStagingDirectory)/<%= project %>.zip'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: '<%= project %>'

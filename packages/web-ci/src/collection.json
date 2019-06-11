@@ -1,0 +1,21 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Adds configuration of CI",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": ["install"]
+    },
+    "azure-devops": {
+      "description": "Adds configuration of Azure DevOps pipeline configuration",
+      "factory": "./azure-devops/index#azureDevOps",
+      "schema": "./azure-devops/schema.json"
+    },
+    "karma": {
+      "description": "Change karma configuration",
+      "factory": "./karma/index#karma",
+      "schema": "./karma/schema.json"
+    }
+  }
+}
