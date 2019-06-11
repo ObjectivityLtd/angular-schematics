@@ -1,0 +1,17 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Extends Angular project creating a good starting point for new projects.",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": ["install"]
+    },
+    "ng-add-external-schematic": {
+      "description": "Runs external @objectivity/angular-schematic-*",
+      "factory": "./ng-add/run-external-schematic#runExternalSchematic",
+      "schema": "./ng-add/schema.json",
+      "private": true
+    }
+  }
+}

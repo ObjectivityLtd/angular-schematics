@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "objectiivty-material-ng-add",
+    "title": "Angular Material ng-add schematic",
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }
+      },
+      "setup": {
+        "description": "Configures useful aspects of Angular project",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to configure useful aspects of Angular project?",
+        "alias": "s"
+      }      ,
+      "uiFramework": {
+        "description": "Configures UI framework",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to configure UI framework?",
+        "alias": "ui"
+      },
+      "ci": {
+        "description": "Adds configuration of CI",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to add configuration of CI?"
+      },
+      "ide": {
+        "description": "Configures IDE, adds common extensions and configurations",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to configures IDE?"
+      },
+      "appInsights": {
+        "description": "Adds Azure AppInsights integration",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to adds Azure AppInsights integration?",
+        "alias": "ai"
+      }
+    },
+    "required": []
+  }

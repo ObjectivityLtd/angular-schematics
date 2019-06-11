@@ -1,0 +1,32 @@
+{
+  "name": "@objectivity/angular-schematic-starter-kit",
+  "version": "0.0.0",
+  "description": "Extends Angular project creating a good starting point for new projects",
+  "repository": "ObjectivityLtd/angular-schematics",
+  "bugs": {
+    "url": "https://github.com/ObjectivityLtd/angular-schematics/issues"
+  },
+  "homepage": "https://github.com/ObjectivityLtd/angular-schematics",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "test": "npm run build && jasmine src/**/*_spec.js"
+  },
+  "keywords": [
+    "schematics",
+    "angular",
+    "angular cli",
+    "objectivity"
+  ],
+  "author": "ObjectivityLtd",
+  "license": "MIT",
+  "schematics": "./src/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^8.0.1",
+    "@angular-devkit/schematics": "^8.0.1",
+    "@types/jasmine": "^3.3.9",
+    "@types/node": "^8.0.31",
+    "jasmine": "^3.3.1",
+    "typescript": "~3.4.3"
+  }
+}
