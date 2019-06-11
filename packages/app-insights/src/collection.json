@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Adds Azure AppInsights integration to Angular project",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": ["install"]
+    },
+    "monitoring-module": {
+      "description": "Adds monitoring module",
+      "factory": "./monitoring-module/index#monitoringModule",
+      "schema": "./monitoring-module/schema.json"
+    }
+  }
+}

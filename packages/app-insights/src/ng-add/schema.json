@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "objectivity-angular-schematic-app-insights-ng-add",
+    "title": "Azure Application Insights ng-add schematic",
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }
+      },
+      "instrumentationKey": {
+        "type": "string",
+        "description": "Instrumentation key.",
+        "default": "",
+        "x-prompt": "The instrumentation key"
+      },
+      "skipInstall": {
+        "description": "When true, does not install dependency packages.",
+        "type": "boolean",
+        "default": false
+      }      
+    },
+    "required": []
+  }

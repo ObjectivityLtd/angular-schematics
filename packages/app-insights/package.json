@@ -1,0 +1,40 @@
+{
+  "name": "@objectivity/angular-schematic-app-insights",
+  "version": "0.0.0",
+  "description": "Adds Azure AppInsights integration to Angular project.",
+  "repository": "ObjectivityLtd/angular-schematics",
+  "bugs": {
+    "url": "https://github.com/ObjectivityLtd/angular-schematics/issues"
+  },
+  "homepage": "https://github.com/ObjectivityLtd/angular-schematics",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "test": "npm run build && jasmine src/**/*_spec.js"
+  },
+  "keywords": [
+    "schematics",
+    "angular",
+    "angular cli",
+    "azure application insights",
+    "ms application insights",
+    "application insights",
+    "angular application insights",
+    "microsoft application insights",
+    "ms app insights",
+    "objectivity"
+  ],
+  "author": "ObjectivityLtd",
+  "license": "MIT",
+  "schematics": "./src/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^8.0.1",
+    "@angular-devkit/schematics": "^8.0.1",
+    "@objectivity/angular-schematic-utils": "^0.0.0",
+    "@types/jasmine": "^3.3.9",
+    "@types/node": "^8.0.31",
+    "jasmine": "^3.3.1",
+    "schematics-utilities": "^1.1.2",
+    "typescript": "~3.4.3"
+  }
+}
