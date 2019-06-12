@@ -10,7 +10,11 @@
         "$default": {
           "$source": "projectName"
         }
-      }
+      },
+      "skipCoreModule": {
+        "description": "When true, does not add core module.",
+        "type": "boolean"
+      } 
     },
     "required": []
   }

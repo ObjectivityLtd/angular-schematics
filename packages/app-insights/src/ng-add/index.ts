@@ -1,23 +1,27 @@
-import { Rule, SchematicContext, Tree, chain, branchAndMerge, SchematicsException } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain, branchAndMerge } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { updateEnvironmentConfiguration, getCoreModulePath, getAppModulePath } from '@objectivity/angular-schematic-utils';
-import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, addImportToModule, InsertChange, getSourceFile, addSymbolToNgModuleMetadata } from 'schematics-utilities';
+import { updateEnvironmentConfiguration, coreModuleExists, addModuleToCoreModule } from '@objectivity/angular-schematic-utils';
+import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject, addModuleImportToRootModule } from 'schematics-utilities';
 import { ngApplicationInsights } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
 export default function (options: Schema): Rule {
-  return (_tree: Tree, context: SchematicContext) => {
+  return (tree: Tree, context: SchematicContext) => {
 
-    context.addTask(new RunSchematicTask('monitoring-module', options));
+    const workspace = getWorkspace(tree);
+    const workspaceProject = getProjectFromWorkspace(workspace, options.project);
+    const skipCoreModule = coreModuleExists(tree, workspaceProject);
+
+    context.addTask(new RunSchematicTask('monitoring-module', { ...options, skipCoreModule }));
 
     return chain([
       branchAndMerge(
         chain([
           addExternaPackage(options),
           updateEnvironments(options),
-          updateCoreModule(options)
-        ])),
+          skipCoreModule ? addMonitorModuleToCoreModule(workspaceProject) : addMonitorModuleToRootModule(workspaceProject)
+        ]))
     ]);
   };
 }
@@ -34,39 +38,16 @@ function updateEnvironments(options: Schema): Rule {
   };
 }
 
-function updateCoreModule(options: Schema): Rule {
+function addMonitorModuleToCoreModule(workspaceProject: WorkspaceProject): Rule {
   return (tree: Tree, _context: SchematicContext) => {
-    const workspace = getWorkspace(tree);
-    const workspaceProject = getProjectFromWorkspace(workspace, options.project);
-    const coreModulePath = getCoreModulePath(tree, workspaceProject);
+    addModuleToCoreModule(tree, 'MonitoringModule', `./monitoring`, workspaceProject);
+    return tree;
+  };
+}
 
-    const coreModuleExists = !!coreModulePath;
-    const mainModulePath = coreModulePath || getAppModulePath(tree, workspaceProject);
-
-    const moduleSource = getSourceFile(tree, mainModulePath);
-
-    if (!moduleSource) {
-      throw new SchematicsException(`Module not found: ${coreModulePath}`);
-    }
-
-    const recorder = tree.beginUpdate(mainModulePath);
-
-    let changes = [
-      ...addImportToModule(moduleSource, mainModulePath, 'MonitoringModule', `./${coreModuleExists ? '' : 'core/'}monitoring`)
-    ];
-
-    if(coreModuleExists) {
-      changes.concat(addSymbolToNgModuleMetadata(moduleSource, mainModulePath, 'exports', 'MonitoringModule'));
-    }
-  
-    changes.forEach(change => {
-      if (change instanceof InsertChange) {
-        recorder.insertLeft(change.pos, change.toAdd);
-      }
-    });
-
-    tree.commitUpdate(recorder);
-
+function addMonitorModuleToRootModule(workspaceProject: WorkspaceProject): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    addModuleImportToRootModule(tree, 'CoreModule', `./core/core.module`, workspaceProject)
     return tree;
   };
 }

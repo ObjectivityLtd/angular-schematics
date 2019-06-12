@@ -1,4 +1,4 @@
-import { Rule, SchematicContext, Tree, chain, apply, url, applyTemplates, move, mergeWith } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain, apply, url, applyTemplates, move, mergeWith, filter, noop } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 import { getWorkspace, getProjectFromWorkspace, buildDefaultPath } from 'schematics-utilities';
 
@@ -13,6 +13,7 @@ export function monitoringModule(options: Schema): Rule {
         const projectEnvImportPath = `@${options.project}-env/environment`;
 
         const templateSource = apply(url('./files'), [
+            options.skipCoreModule ? filter(path => !path.endsWith('core.module.ts.template')) : noop(),
             applyTemplates({
                 projectEnvImportPath
             }),
