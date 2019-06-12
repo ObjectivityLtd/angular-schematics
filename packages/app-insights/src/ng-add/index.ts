@@ -2,7 +2,7 @@ import { Rule, SchematicContext, Tree, chain, branchAndMerge, SchematicsExceptio
 import { Schema } from './schema';
 import { updateEnvironmentConfiguration, getCoreModulePath, getAppModulePath } from '@objectivity/angular-schematic-utils';
 import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, addImportToModule, InsertChange, getSourceFile, addSymbolToNgModuleMetadata } from 'schematics-utilities';
-import { ngApplicationInsightsVersion } from '../version-names';
+import { ngApplicationInsights } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
@@ -73,7 +73,7 @@ function updateCoreModule(options: Schema): Rule {
 
 function addExternaPackage(options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    addPackageToPackageJson(tree, 'dependencies', '@markpieszak/ng-application-insights', `${ngApplicationInsightsVersion}`);
+    addPackageToPackageJson(tree, 'dependencies', ngApplicationInsights.pkg, ngApplicationInsights.version);
 
     if (options.skipInstall !== true) {
       context.addTask(new NodePackageInstallTask());
