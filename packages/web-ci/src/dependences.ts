@@ -1,4 +1,4 @@
 export const karmaJunitReporterPkg = {
-    pkg: '@markpieszak/ng-application-insights',
+    pkg: 'karma-junit-reporter',
     version: '^1.2.0'
 };
