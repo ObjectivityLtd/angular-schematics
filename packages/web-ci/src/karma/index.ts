@@ -1,6 +1,6 @@
 import { Rule, SchematicContext, Tree, chain, SchematicsException } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { karmaJunitReporterVersion } from "../version-names";
+import { karmaJunitReporterPkg } from "../dependences";
 import { normalize } from '@angular-devkit/core';
 import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject } from "schematics-utilities";
@@ -35,7 +35,7 @@ function addJUnitFolderToIgnore(_options: Schema): Rule {
 
 function installPackages(_options: Schema): Rule {
     return (host: Tree, context: SchematicContext) => {
-        addPackageToPackageJson(host, 'dependencies', 'karma-junit-reporter', karmaJunitReporterVersion);
+        addPackageToPackageJson(host, 'dependencies', karmaJunitReporterPkg.pkg, karmaJunitReporterPkg.version);
 
         if (_options.skipInstall !== true) {
             context.addTask(new NodePackageInstallTask());
