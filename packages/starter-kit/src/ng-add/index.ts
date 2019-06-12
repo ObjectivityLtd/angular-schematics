@@ -1,56 +1,27 @@
-import { Rule, SchematicContext, Tree, TaskId } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { RunSchematicTask, NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { green } from '@angular-devkit/core/src/terminal';
-import { addPackageToPackageJson } from "schematics-utilities";
+import { SchematicsRunner } from './schematics-runner';
 
 export default function (options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    
-    let runInstallTask = false;
-    let runPostInstallTask = false;
 
-    if (options.uiFramework) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-ui-framework', '^0.1.0-alpha');
-      runInstallTask = true;
-    }
-
-    if (options.ci) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-web-ci', '^0.1.0-alpha');
-      runInstallTask = true;
-      runPostInstallTask = true;
-    }
-
-    if (options.ide) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-ide', '^0.1.0-alpha');
-      runInstallTask = true;
-    }
-
+    const version = '^0.1.0-alpha';
+    const runner = new SchematicsRunner(tree, context);
     if (options.setup) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-web-setup', '^0.1.0-alpha');
-      runInstallTask = true;
+      runner.registerSchematic('@objectivity/angular-schematic-web-setup', version, {});
     }
-
+    if (options.uiFramework) {
+      runner.registerSchematic('@objectivity/angular-schematic-ui-framework', version, { project: options.project, skipInstall: true });
+    }
+    if (options.ci) {
+      runner.registerSchematic('@objectivity/angular-schematic-web-ci', version, { project: options.project, skipInstall: true });
+    }
+    if (options.ide) {
+      runner.registerSchematic('@objectivity/angular-schematic-ide', version, {});
+    }
     if (options.appInsights) {
-      addPackageToPackageJson(tree, 'devDependencies', '@objectivity/angular-schematic-app-insights', '^0.1.0-alpha');
-      runInstallTask = true;
+      runner.registerSchematic('@objectivity/angular-schematic-app-insights', version, { project: options.project, skipInstall: true });
     }
-
-    let installTaskIds: TaskId[] | undefined = undefined; 
-
-    // Since the Starter Kit schematics depend on the schematic utility functions from the
-    // different angular-schematic packages, we need to install packages before loading the schematic files.
-    if (runInstallTask) {
-      const installTaskId = context.addTask(new NodePackageInstallTask());
-      installTaskIds = [installTaskId];
-    }
-    
-    console.info(green(`Executing angular schematics...`));
-
-    const executeTaskId  = context.addTask(new RunSchematicTask('ng-add-external-schematic', options), installTaskIds);
-
-    if(runPostInstallTask) {
-      context.addTask(new NodePackageInstallTask(), [executeTaskId]);
-    }
+    runner.run();
   };
 }

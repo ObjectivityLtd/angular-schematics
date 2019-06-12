@@ -6,12 +6,6 @@
       "factory": "./ng-add/index",
       "schema": "./ng-add/schema.json",
       "aliases": ["install"]
-    },
-    "ng-add-external-schematic": {
-      "description": "Runs external @objectivity/angular-schematic-*",
-      "factory": "./ng-add/run-external-schematic#runExternalSchematic",
-      "schema": "./ng-add/schema.json",
-      "private": true
     }
   }
 }
