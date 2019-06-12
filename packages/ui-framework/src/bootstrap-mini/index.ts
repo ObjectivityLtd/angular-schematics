@@ -1,7 +1,7 @@
 import { Rule, SchematicContext, Tree, chain, apply, url, move, mergeWith } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 import { addPackageToPackageJson, getWorkspace, buildDefaultPath, getProjectFromWorkspace, WorkspaceProject, getStylesPath } from 'schematics-utilities';
-import { bootstrapVersion } from '../version-names';
+import { bootstrapPkg } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { red, italic } from '@angular-devkit/core/src/terminal';
 
@@ -12,7 +12,7 @@ export function bootstrapMini(options: Schema): Rule {
         const projectName = options.project;
         const workspaceProject = getProjectFromWorkspace(workspace, projectName);
 
-        addPackageToPackageJson(tree, 'dependencies', 'bootstrap', `${bootstrapVersion}`);
+        addPackageToPackageJson(tree, 'dependencies', bootstrapPkg.pkg, bootstrapPkg.version);
 
         if (options.skipInstall !== true) {
             context.addTask(new NodePackageInstallTask());
