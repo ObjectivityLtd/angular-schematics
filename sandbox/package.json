@@ -21,8 +21,8 @@
     "check:sk": "npm run clean && ng add @objectivity/angular-schematic-starter-kit",
     "check:uf": "npm run clean && ng add @objectivity/angular-schematic-ui-framework",
     "check:ut": "npm run clean && ng add @objectivity/angular-schematic-app-utils",
-    "ui:wc": "npm run clean && ng add @objectivity/angular-schematic-ui-web-ci",
-    "sk:ws": "npm run clean && ng add @objectivity/angular-schematic-web-setup"
+    "check:wc": "npm run clean && ng add @objectivity/angular-schematic-ui-web-ci",
+    "check:ws": "npm run clean && ng add @objectivity/angular-schematic-web-setup"
   },
   "private": true,
   "dependencies": {
