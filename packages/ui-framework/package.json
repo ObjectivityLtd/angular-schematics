@@ -1,6 +1,6 @@
 {
   "name": "@objectivity/angular-schematic-ui-framework",
-  "version": "0.1.0-alpha.1",
+  "version": "8.0.0",
   "description": "Adds configuration of UI framework.",
   "repository": "ObjectivityLtd/angular-schematics",
   "bugs": {
