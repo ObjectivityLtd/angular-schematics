@@ -16,17 +16,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.1.0-alpha.2](https://github.com/ObjectivityLtd/angular-schematics/compare/@objectivity/angular-schematic-app-insights@0.1.0-alpha.0...@objectivity/angular-schematic-app-insights@0.1.0-alpha.2) (2019-06-12)
 
-
-
-# 0.1.0-alpha.1 (2019-06-11)
-
-
-### Bug Fixes
-
-* update environment files ([7077e9c](https://github.com/ObjectivityLtd/angular-schematics/commit/7077e9c))
-
-
-
+**Note:** Version bump only for package @objectivity/angular-schematic-app-insights
 
 
 # [0.1.0-alpha.1](https://github.com/ObjectivityLtd/angular-schematics/compare/@objectivity/angular-schematic-app-insights@0.1.0-alpha.0...@objectivity/angular-schematic-app-insights@0.1.0-alpha.1) (2019-06-11)
@@ -45,4 +35,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* 🎸 Adds @objectivity/angular-schematic-app-insights ([cf977c9](https://github.com/ObjectivityLtd/angular-schematics/commit/cf977c9))
+* add @objectivity/angular-schematic-app-insights ([cf977c9](https://github.com/ObjectivityLtd/angular-schematics/commit/cf977c9))
