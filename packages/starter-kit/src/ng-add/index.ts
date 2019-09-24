@@ -5,7 +5,7 @@ import { SchematicsRunner } from './schematics-runner';
 export default function (options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
 
-    const version = '^0.1.0-alpha';
+    const version = '^8.2';
     const runner = new SchematicsRunner(tree, context);
     if (options.setup) {
       runner.registerSchematic('@objectivity/angular-schematic-web-setup', version, {});
