@@ -1,9 +1,10 @@
 import { Rule, SchematicContext, Tree, chain, apply, url, move, mergeWith } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { addPackageToPackageJson, getWorkspace, buildDefaultPath, getProjectFromWorkspace, WorkspaceProject, getStylesPath } from 'schematics-utilities';
+import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject, getStylesPath } from 'schematics-utilities';
 import { bootstrapPkg } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { red, italic } from '@angular-devkit/core/src/terminal';
+import { buildRootPath } from '@objectivity/angular-schematic-utils';
 
 export function bootstrapMini(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
@@ -28,7 +29,7 @@ export function bootstrapMini(options: Schema): Rule {
 function addSccsFiles(workspaceProject: WorkspaceProject) {
 
     return (_host: Tree) => {
-        const projectPath = buildDefaultPath(workspaceProject);
+        const projectPath = buildRootPath(workspaceProject);
 
         const templateSource = apply(url('./files'), [
             move(projectPath)
@@ -56,8 +57,8 @@ function updateAppStyle(workspaceProject: WorkspaceProject) {
 
         const htmlContent = buffer.toString();
         const insertion = '\n' +
-            `@import 'bootstrap.scss';\n` +
-            `@import 'objectivity-material.scss';\n`;
+            `@import 'scss/bootstrap.scss';\n` +
+            `@import 'scss/objectivity-material.scss';\n`;
 
         if (htmlContent.includes(insertion)) {
             return;
