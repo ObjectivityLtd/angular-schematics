@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.0.0...8.2.0) (2019-09-25)
+
+
+### Bug Fixes
+
+* fix path for scss files ([c5f025e](https://github.com/ObjectivityLtd/angular-schematics/commit/c5f025e))
+
+
+### Features
+
+* update version of @markpieszak/ng-application-insights ([2a7232d](https://github.com/ObjectivityLtd/angular-schematics/commit/2a7232d))
+* upgrade to version 8.2 ([29d5b5d](https://github.com/ObjectivityLtd/angular-schematics/commit/29d5b5d))
+
+
+
+
+
 # [8.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/0.1.0-alpha.1...8.0.0) (2019-06-13)
 
 

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 8.2.0 (2019-09-25)
+
+
+### Features
+
+* update version of @markpieszak/ng-application-insights ([2a7232d](https://github.com/ObjectivityLtd/angular-schematics/commit/2a7232d))
+
+
+
 # 8.0.0 (2019-06-13)
 
 

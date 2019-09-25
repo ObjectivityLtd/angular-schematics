@@ -1,6 +1,6 @@
 {
   "name": "@objectivity/angular-schematic-starter-kit",
-  "version": "8.0.0",
+  "version": "8.2.0",
   "description": "Extends Angular project creating a good starting point for new projects",
   "repository": "ObjectivityLtd/angular-schematics",
   "bugs": {
