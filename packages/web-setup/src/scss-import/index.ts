@@ -27,51 +27,56 @@ function updateAngularFile(options: Schema): Rule {
             ]
         };
 
-        const angularConfigContent = tree.read(angularConfig);
-        if (!angularConfigContent) {
-            throw new Error('Invalid path: ' + angularConfig);
+        addStylePreprocessorOptions(tree, angularConfig, pathToScssFolder, options.project, 'build', stylePreprocessorOptions);
+        addStylePreprocessorOptions(tree, angularConfig, pathToScssFolder, options.project, 'test', stylePreprocessorOptions);
+    };
+}
+
+function addStylePreprocessorOptions(tree: Tree, angularConfig: Path, pathToScssFolder: string, project: string, architect: string, stylePreprocessorOptions: any) {
+    
+    const angularConfigContent = tree.read(angularConfig);
+    if (!angularConfigContent) {
+        throw new Error('Invalid path: ' + angularConfig);
+    }
+
+    const tsCfgAst = parseJsonAst(angularConfigContent.toString('utf-8'));
+    if (tsCfgAst.kind !== 'object') {
+        throw new Error('Invalid tsconfig content.');
+    }
+
+    const buildOptionsAstNode = findPropertyInDeepAstObject(tsCfgAst, ['projects', project, 'architect', architect, 'options']);
+    const stylePreprocessorOptionsAstNode = findPropertyInAstObject(buildOptionsAstNode, 'stylePreprocessorOptions');
+
+    if (!stylePreprocessorOptionsAstNode) {
+        const recorder = tree.beginUpdate(angularConfig);
+        appendPropertyInAstObject(recorder, buildOptionsAstNode, "stylePreprocessorOptions", stylePreprocessorOptions, 4);
+        tree.commitUpdate(recorder);
+
+    } else {
+
+        if (stylePreprocessorOptionsAstNode.kind !== 'object') {
+            throw new Error('Invalid stylePreprocessorOptionsAstNode content.');
         }
 
-        const tsCfgAst = parseJsonAst(angularConfigContent.toString('utf-8'));
-        if (tsCfgAst.kind !== 'object') {
-            throw new Error('Invalid tsconfig content.');
-        }
-
-        const buildOptionsAstNode = findPropertyInDeepAstObject(tsCfgAst, ['projects', options.project, 'architect', 'build', 'options']);
-        const stylePreprocessorOptionsAstNode = findPropertyInAstObject(buildOptionsAstNode, 'stylePreprocessorOptions');
-
-        if (!stylePreprocessorOptionsAstNode) {
+        const includePathsAstNode = findPropertyInAstObject(stylePreprocessorOptionsAstNode, 'includePaths');
+     
+        if (!includePathsAstNode) {
             const recorder = tree.beginUpdate(angularConfig);
-            appendPropertyInAstObject(recorder, buildOptionsAstNode, "stylePreprocessorOptions", stylePreprocessorOptions, 4);
+            appendPropertyInAstObject(recorder, stylePreprocessorOptionsAstNode, 'includePaths', stylePreprocessorOptions.includePaths, 4);
             tree.commitUpdate(recorder);
-
         } else {
 
-            if (stylePreprocessorOptionsAstNode.kind !== 'object') {
-                throw new Error('Invalid stylePreprocessorOptionsAstNode content.');
+            if (includePathsAstNode && includePathsAstNode.kind != 'array') {
+                throw new SchematicsException('Invalid includePaths property; expected an array.');
             }
 
-            const includePathsAstNode = findPropertyInAstObject(stylePreprocessorOptionsAstNode, 'includePaths');
-
-            
-            if (!includePathsAstNode) {
+            if (!includePathsAstNode.value.includes(pathToScssFolder)) {
                 const recorder = tree.beginUpdate(angularConfig);
-                appendPropertyInAstObject(recorder, stylePreprocessorOptionsAstNode, 'includePaths', stylePreprocessorOptions.includePaths, 4);
+                appendValueInAstArray(recorder, includePathsAstNode, pathToScssFolder);
                 tree.commitUpdate(recorder);
-            } else {
-
-                if (includePathsAstNode && includePathsAstNode.kind != 'array') {
-                    throw new SchematicsException('Invalid includePaths property; expected an array.');
-                }
-
-                if (!includePathsAstNode.value.includes(pathToScssFolder)) {
-                    const recorder = tree.beginUpdate(angularConfig);
-                    appendValueInAstArray(recorder, includePathsAstNode, pathToScssFolder);
-                    tree.commitUpdate(recorder);
-                }
             }
         }
-    };
+    }
 }
 
 function findPropertyInDeepAstObject(node: JsonAstObject, propertyNames: string[]): JsonAstObject {
