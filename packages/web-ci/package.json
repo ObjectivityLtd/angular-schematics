@@ -1,6 +1,6 @@
 {
   "name": "@objectivity/angular-schematic-web-ci",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "description": "Adds configuration of CI.",
   "repository": "ObjectivityLtd/angular-schematics",
   "bugs": {

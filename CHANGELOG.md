@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.1](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.0...8.2.1) (2019-10-09)
+
+
+### Bug Fixes
+
+* add missing stylePreprocessorOptions for test config ([79b296f](https://github.com/ObjectivityLtd/angular-schematics/commit/79b296f))
+
+
+
+
+
+
 # [8.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.0.0...8.2.0) (2019-09-25)
 
 
