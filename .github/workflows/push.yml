@@ -1,0 +1,22 @@
+name: Push
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
+
+jobs:
+  build_and_test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+    - name: Run Yarn
+      run: yarn
+    - name: Bootstrap & Build packages
+      run: yarn ci:build   
+    - name: Execute the schematic against the sandbox
+      run: yarn ci:sandbox
