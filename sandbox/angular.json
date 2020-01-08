@@ -124,7 +124,8 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "sandbox",
   "cli": {
     "packageManager": "yarn"
