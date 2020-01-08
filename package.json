@@ -4,17 +4,16 @@
   "scripts": {
     "commit": "git-cz",
     "bootstrap": "lerna bootstrap --use-workspaces",
-    "release": "lerna publish",
     "build": "lerna run build",
     "test": "lerna run test",
     "clean": "lerna clean",
-    "clean:build": "lerna exec -- rimraf lib",
     "ls": "lerna ls",
+    "version:upgrade": "lerna run build && lerna version --conventional-commits --create-release github",
     "sandbox:upgrade": "npx rimraf sandbox && npx @angular/cli new sandbox --routing=true --skipGit=true --skipInstall=true --style scss && cd sandbox && ng config cli.packageManager yarn && yarn && cd .. && yarn sandbox:test",
     "sandbox:install": "cd sandbox && yarn",
     "sandbox:run:app-insights": "cd sandbox && yarn ng add @objectivity/angular-schematic-app-insights --instrumentationKey key",
     "sandbox:run:web-setup": "cd sandbox && yarn ng add @objectivity/angular-schematic-web-setup",
-    "sandbox:run:ui-framework": "cd sandbox && yarn ng add @objectivity/angular-schematic-ui-framework --material false --bootstrap-mini && yarn ng g @objectivity/angular-schematic-ui-framework:material --theme indigo-pink",    
+    "sandbox:run:ui-framework": "cd sandbox && yarn ng add @objectivity/angular-schematic-ui-framework --material false --bootstrap-mini && yarn ng g @objectivity/angular-schematic-ui-framework:material --theme indigo-pink",
     "sandbox:run:ide": "cd sandbox && yarn ng add @objectivity/angular-schematic-ide --vscode",
     "sandbox:run:web-ci": "cd sandbox && yarn ng add @objectivity/angular-schematic-web-ci --azure-devops",
     "sandbox:clean": "git checkout HEAD -- sandbox && git clean -f -d sandbox",
@@ -25,7 +24,8 @@
     "sandbox:test": "cd sandbox && yarn lint && yarn ng test --watch=false --progress=false --source-map=false && yarn e2e && yarn build",
     "ci:sandbox": "yarn sandbox:install && yarn sandbox:link && yarn sandbox:run:all && cd sandbox && yarn lint && yarn build",
     "ci:build": "yarn bootstrap && yarn build",
-    "ci:test": "yarn test"
+    "ci:test": "yarn test",
+    "ci:publish": "lerna publish from-package -y --no-verify-access"
   },
   "workspaces": [
     "packages/*"
