@@ -1,0 +1,19 @@
+name: Publish NPM
+
+on:
+  release:
+    types: [published]  
+jobs:
+  publish-npm:
+    name: Publish NPM
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        registry-url: 'https://registry.npmjs.org'
+    - run: yarn install --frozen-lockfile
+    - name: Publish to NPMJS
+      run: yarn ci:publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
