@@ -1,5 +1,6 @@
 {
   "name": "root",
+  "repository": "https://github.com/ObjectivityLtd/angular-schematics",
   "private": true,
   "scripts": {
     "commit": "git-cz",
@@ -35,13 +36,14 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2",
     "git-cz": "^3.0.1",
     "husky": "^2.4.0",
     "lerna": "^3.15.0"
   },
   "config": {
     "commitizen": {
-      "path": "git-cz"
+        "path": "cz-conventional-changelog"
     }
   },
   "husky": {
