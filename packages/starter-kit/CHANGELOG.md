@@ -3,15 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 8.2.14-alpha.0 (2020-01-11)
+## [8.2.14-alpha.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.1...v8.2.14-alpha.0) (2020-01-11)
 
 
 
-## 8.2.1 (2020-01-09)
+## [8.2.1](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.0...8.2.1) (2019-10-09)
 
 
 
-# 8.2.0 (2020-01-09)
+# [8.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.0.0...8.2.0) (2019-09-25)
 
 
 ### Features
@@ -20,7 +20,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# 8.0.0 (2020-01-09)
+# [8.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/0.1.0-alpha.1...8.0.0) (2019-06-13)
 
 
 ### Bug Fixes
@@ -34,7 +34,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# 0.1.0-alpha.1 (2020-01-09)
+# 0.1.0-alpha.1 (2019-06-11)
 
 
 ### Bug Fixes
@@ -45,34 +45,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * adds @objectivity/angular-schematic-starter-kit ([bad5a38](https://github.com/ObjectivityLtd/angular-schematics/commit/bad5a38aa993d2bf5fa6ab3bb3f44cba4a626b97))
-
-
-
-
-
-
-## 8.2.1 (2019-10-09)
-
-
-
-# 8.2.0 (2019-09-25)
-
-* Update version
-
-### Features
-
-* upgrade to version 8.2 ([29d5b5d](https://github.com/ObjectivityLtd/angular-schematics/commit/29d5b5d))
-
-
-
-# 8.0.0 (2019-06-13)
-
-
-### Bug Fixes
-
-* update package version ([27f3b1f](https://github.com/ObjectivityLtd/angular-schematics/commit/27f3b1f))
-
-
-### Features
-
-* change way how schematics are installed ([093b183](https://github.com/ObjectivityLtd/angular-schematics/commit/093b183))

@@ -3,11 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 8.2.14-alpha.0 (2020-01-11)
+## [8.2.14-alpha.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.1...v8.2.14-alpha.0) (2020-01-11)
 
 
 
-## 8.2.1 (2020-01-09)
+## [8.2.1](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.0...8.2.1) (2019-10-09)
 
 
 ### Bug Fixes
@@ -16,7 +16,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# 8.2.0 (2020-01-09)
+# [8.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.0.0...8.2.0) (2019-09-25)
 
 
 ### Bug Fixes
@@ -31,7 +31,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# 8.0.0 (2020-01-09)
+# [8.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/0.1.0-alpha.1...8.0.0) (2019-06-13)
 
 
 ### Bug Fixes
@@ -49,71 +49,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# 0.1.0-alpha.1 (2020-01-09)
-
-
-### Bug Fixes
-
-* add missing dependency ([24e1537](https://github.com/ObjectivityLtd/angular-schematics/commit/24e15373affdcf19ac667cad7658df78d85856b2))
-* update environment files ([15a2446](https://github.com/ObjectivityLtd/angular-schematics/commit/15a24466affb02863fe9ae90f7a025f6b4267aa0))
-
-
-### Features
-
-* adds @objectivity/angular-schematic-app-insights ([e37b935](https://github.com/ObjectivityLtd/angular-schematics/commit/e37b935d54758d07403a7d692cc88b82ce6a87d8))
-* adds @objectivity/angular-schematic-ide package ([a679585](https://github.com/ObjectivityLtd/angular-schematics/commit/a679585f62f8c75b6853fd226ce33c50f8c1d4aa))
-* adds @objectivity/angular-schematic-starter-kit ([bad5a38](https://github.com/ObjectivityLtd/angular-schematics/commit/bad5a38aa993d2bf5fa6ab3bb3f44cba4a626b97))
-* adds @objectivity/angular-schematic-ui-framework ([51a2565](https://github.com/ObjectivityLtd/angular-schematics/commit/51a2565911ecff5222120bdebb437b32079a7e36))
-* adds @objectivity/angular-schematic-utils package ([cafe349](https://github.com/ObjectivityLtd/angular-schematics/commit/cafe3494c2bcccfe7e9d51157408fda0add4fd88))
-* adds @objectivity/angular-schematic-web-ci ([413eaa0](https://github.com/ObjectivityLtd/angular-schematics/commit/413eaa04a6b02ee46538d3978433e1dc40c68514))
-* adds @objectivity/angular-schematic-web-setup ([179b121](https://github.com/ObjectivityLtd/angular-schematics/commit/179b12146eead15cc8a8cf07aa99dd135ec9d9dd))
-
-
-
-
-
-
-## [8.2.1](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.0...8.2.1) (2019-10-09)
-
-
-### Bug Fixes
-
-* add missing stylePreprocessorOptions for test config ([79b296f](https://github.com/ObjectivityLtd/angular-schematics/commit/79b296f))
-
-
-
-
-
-
-# [8.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.0.0...8.2.0) (2019-09-25)
-
-
-### Bug Fixes
-
-* fix path for scss files ([c5f025e](https://github.com/ObjectivityLtd/angular-schematics/commit/c5f025e))
-
-
-### Features
-
-* update version of @markpieszak/ng-application-insights ([2a7232d](https://github.com/ObjectivityLtd/angular-schematics/commit/2a7232d))
-* upgrade to version 8.2 ([29d5b5d](https://github.com/ObjectivityLtd/angular-schematics/commit/29d5b5d))
-
-
-
-
-
-# [8.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/0.1.0-alpha.1...8.0.0) (2019-06-13)
-
-
-### Bug Fixes
-
-* update dependency ([d7b1973](https://github.com/ObjectivityLtd/angular-schematics/commit/d7b1973))
-* update dependency ([b908d45](https://github.com/ObjectivityLtd/angular-schematics/commit/b908d45))
-* update package version ([27f3b1f](https://github.com/ObjectivityLtd/angular-schematics/commit/27f3b1f))
-
-
-### Features
-
-* add addModuleToCoreModule, coreModuleExists methods ([efe4df7](https://github.com/ObjectivityLtd/angular-schematics/commit/efe4df7))
-* add core.module ([19f3f7c](https://github.com/ObjectivityLtd/angular-schematics/commit/19f3f7c))
-* change way how schematics are installed ([093b183](https://github.com/ObjectivityLtd/angular-schematics/commit/093b183))

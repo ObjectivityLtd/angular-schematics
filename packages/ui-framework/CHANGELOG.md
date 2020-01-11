@@ -3,15 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 8.2.14-alpha.0 (2020-01-11)
+## [8.2.14-alpha.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.1...v8.2.14-alpha.0) (2020-01-11)
 
 
 
-## 8.2.1 (2020-01-09)
+## [8.2.1](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.0...8.2.1) (2019-10-09)
 
 
 
-# 8.2.0 (2020-01-09)
+# [8.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.0.0...8.2.0) (2019-09-25)
 
 
 ### Bug Fixes
@@ -20,7 +20,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# 8.0.0 (2020-01-09)
+# [8.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/0.1.0-alpha.1...8.0.0) (2019-06-13)
 
 
 ### Bug Fixes
@@ -31,33 +31,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * adds @objectivity/angular-schematic-ui-framework ([51a2565](https://github.com/ObjectivityLtd/angular-schematics/commit/51a2565911ecff5222120bdebb437b32079a7e36))
-
-
-
-
-
-
-## 8.2.1 (2019-10-09)
-
-
-
-# 8.2.0 (2019-09-25)
-
-
-### Bug Fixes
-
-* fix path for scss files ([c5f025e](https://github.com/ObjectivityLtd/angular-schematics/commit/c5f025e))
-
-
-
-# 8.0.0 (2019-06-13)
-
-
-### Bug Fixes
-
-* update dependency ([b908d45](https://github.com/ObjectivityLtd/angular-schematics/commit/b908d45))
-
-
-### Features
-
-* add @objectivity/angular-schematic-ui-framework ([311da7c](https://github.com/ObjectivityLtd/angular-schematics/commit/311da7c))
