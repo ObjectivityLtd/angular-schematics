@@ -20,3 +20,5 @@ jobs:
       run: yarn ci:build   
     - name: Execute the schematic against the sandbox
       run: yarn ci:sandbox
+    - name: Execute the schematic against the sandbox workspace
+      run: yarn ci:sandbox-workspace      
