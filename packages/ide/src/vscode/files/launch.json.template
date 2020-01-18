@@ -1,19 +1,19 @@
 {
     "version": "0.2.0",
-    "configurations": [
+    "configurations": [<% for (let project of projects) {%>
         {
             "type": "chrome",
             "request": "launch",
-            "name": "ng serve",
-            "url": "<%= serveProtocol %>://<%= serveDomain %>:<%= servePort %>",
-            "webRoot": "${workspaceFolder}"
+            "name": "ng serve (<%= project.name %>)",
+            "url": "<%= project.serveProtocol %>://<%= project.serveDomain %>:<%= project.servePort %>",
+            "webRoot": "<%= project.webRoot %>"
         },
         {
             "type": "chrome",
             "request": "launch",
-            "name": "ng test",
-            "url": "<%= testProtocol %>://<%= testDomain %>:<%= testPort %>/debug.html",
-            "webRoot": "${workspaceFolder}"
-        }
+            "name": "ng test (<%= project.name %>)",
+            "url": "<%= project.testProtocol %>://<%= project.testDomain %>:<%= project.testPort %>/debug.html",
+            "webRoot": "<%= project.webRoot %>"
+        },<% } %>
     ]
 }
