@@ -1,11 +1,9 @@
 name: Push
-
 on:
   push:
     branches:
       - '*'
       - '!master'
-
 jobs:
   build_and_test:
 
