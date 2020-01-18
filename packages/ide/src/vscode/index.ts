@@ -1,27 +1,16 @@
 import { Rule, SchematicContext, Tree, apply, url, move, chain, branchAndMerge, mergeWith, applyTemplates, SchematicsException } from '@angular-devkit/schematics';
-import { getProjectFromWorkspace, WorkspaceProject, getWorkspace } from "schematics-utilities";
+import { WorkspaceProject, getWorkspace } from "schematics-utilities";
 
 export function vscode(_options: any): Rule {
   return (host: Tree, _context: SchematicContext) => {
 
-    const serveOptions = getServeOptions(host);
-
-    const templateServeOptions = {
-      servePort: serveOptions.port || 4200,
-      serveProtocol: serveOptions.ssl === true ? 'https' : 'http',
-      serveDomain: serveOptions.host || 'localhost'
-    };
-
-    const templateTestOptions = {
-      testProtocol: 'http',
-      testDomain: 'localhost',
-      testPort: 9876
-    };
+    const projects = getWorkspace(host).projects;
 
     const templateSource = apply(url('./files'), [
       applyTemplates({
-        ...templateServeOptions,
-        ...templateTestOptions
+        projects:  Object.keys(projects).map(key => {
+            return getTemplateServeOptions(projects[key], key);
+        })
       }),
       move('/.vscode')
     ]);
@@ -34,11 +23,19 @@ export function vscode(_options: any): Rule {
   };
 }
 
-function getServeOptions(host: Tree) {
-  const workspace = getWorkspace(host);
-  const workspaceProject = getProjectFromWorkspace(workspace);
-
-  return getProjectTargetOptions(workspaceProject, 'serve');
+function getTemplateServeOptions(project: WorkspaceProject, projectName: string) {
+    const projectRoot = project.root;
+    const serveOptions = getProjectTargetOptions(project, 'serve');
+    return {
+        servePort: serveOptions.port || 4200,
+        serveProtocol: serveOptions.ssl === true ? 'https' : 'http',
+        serveDomain: serveOptions.host || 'localhost',
+        name: projectName,
+        webRoot: projectRoot == '' ? '${workspaceFolder}' : '${workspaceFolder}/' + projectRoot,
+        testProtocol: 'http',
+        testDomain: 'localhost',
+        testPort: 9876
+    };
 }
 
 function getProjectTargetOptions(project: WorkspaceProject, buildTarget: string) {
