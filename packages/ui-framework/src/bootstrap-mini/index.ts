@@ -57,8 +57,7 @@ function updateAppStyle(workspaceProject: WorkspaceProject) {
 
         const htmlContent = buffer.toString();
         const insertion = '\n' +
-            `@import 'scss/bootstrap.scss';\n` +
-            `@import 'scss/objectivity-material.scss';\n`;
+            `@import 'scss/bootstrap.scss';\n`;
 
         if (htmlContent.includes(insertion)) {
             return;
