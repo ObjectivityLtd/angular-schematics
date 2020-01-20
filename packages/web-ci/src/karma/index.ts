@@ -1,16 +1,21 @@
-import { Rule, SchematicContext, Tree, chain, SchematicsException } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain, SchematicsException, apply, url, applyTemplates, move, mergeWith } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 import { karmaJunitReporterPkg } from "../dependences";
 import { normalize } from '@angular-devkit/core';
 import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
-import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject } from "schematics-utilities";
+import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject, InsertChange, ReplaceChange, NoopChange, Change } from "schematics-utilities";
+import { KarmaConfigurationContext } from './karma-configuration-context';
+import * as ts from 'typescript';
 
 export function karma(options: Schema): Rule {
-    return (_tree: Tree, _context: SchematicContext) => {
+    return (tree: Tree, _context: SchematicContext) => {
+        const karmaConfigurationContext = createKarmaConfigurationContext(tree, options);
+
         return chain([
-            updateKarmaConfiguration(options),
+            updateKarmaConfiguration(karmaConfigurationContext, options),
             addJUnitFolderToIgnore(options),
-            installPackages(options)
+            installPackages(options),
+            createProtractorCiFile(karmaConfigurationContext, options)
         ]);
     };
 }
@@ -45,35 +50,70 @@ function installPackages(_options: Schema): Rule {
     };
 }
 
-function updateKarmaConfiguration(options: Schema): Rule {
+function createProtractorCiFile(karmaConfigurationContext: KarmaConfigurationContext, options: Schema) {
+    const templateSource = apply(url('./files'), [
+        applyTemplates({
+            ...options
+        }),
+        move(karmaConfigurationContext.protractorConfigPath)
+    ]);
+    return chain([
+        mergeWith(templateSource)
+    ]);
+}
+
+function updateKarmaConfiguration(karmaConfigurationContext: KarmaConfigurationContext, options: Schema): Rule {
     return (host: Tree, context: SchematicContext) => {
         context.logger.info(`Updating karma configuration`);
 
-        const workspace = getWorkspace(host);
-        const projectName = options.project;
-        const workspaceProject = getProjectFromWorkspace(workspace, projectName);
-        const karmaPath = getProjectKarmaFile(workspaceProject);
-
-        try {
-            const buffer = host.read(karmaPath);
-            if (buffer !== null) {
-                let content = buffer.toString();
-                content = content.replace(/plugins: \[(\n\s+)/gm, 'plugins: \[$1require(\'karma-junit-reporter\'),$1');
-                content = content.replace(/(reports: \[)/gm, `$1'cobertura', `);
-                content = content.replace(/(reporters: \[)/gm, `$1'junit', `);
-                content = content.replace(/(\n\s+)(port:)/gm, `$1junitReporter: { outputDir: './junit' },$1$2`);
-                host.overwrite(karmaPath, content);
+        let changes = [
+            addPlugin(host, karmaConfigurationContext, 'karma-junit-reporter'),
+            addReport(host, karmaConfigurationContext, 'cobertura'),
+            addReporter(host, karmaConfigurationContext, 'junit'),
+            addJunitReporter(host, karmaConfigurationContext, options),
+            addLauncher(host, karmaConfigurationContext)
+        ];
+        
+        const declarationRecorder = host.beginUpdate(karmaConfigurationContext.karmaConfigFileName);
+        for (let change of changes) {
+            if (change instanceof InsertChange) {
+                declarationRecorder.insertLeft(change.pos, change.toAdd);
+            } else if (change instanceof ReplaceChange) {
+                const action = <any>change;
+                declarationRecorder.remove(action.pos, action.oldText.length);
+                declarationRecorder.insertLeft(action.pos, action.newText);
             }
-        } catch { }
-
+        }
+        host.commitUpdate(declarationRecorder);
+    
         return host;
     };
+}
+
+function createKarmaConfigurationContext(host: Tree, options: Schema): KarmaConfigurationContext {
+    const workspace = getWorkspace(host);
+    const projectName = options.project;
+    const workspaceProject = getProjectFromWorkspace(workspace, projectName);
+    const karmaPath = getProjectKarmaFile(workspaceProject);
+    const protractorPath = getProjectProtractorPath(workspaceProject);
+
+    return {
+        karmaConfigFileName: karmaPath,
+        protractorConfigPath: protractorPath
+    }
 }
 
 function getProjectKarmaFile(project: WorkspaceProject): string {
     const testOptions = getProjectTargetOptions(project, 'test');
 
     return normalize(testOptions.karmaConfig);
+}
+
+function getProjectProtractorPath(project: WorkspaceProject): string {
+    const testOptions = getProjectTargetOptions(project, 'e2e');
+
+    const protractorConfigFile = normalize(testOptions.protractorConfig);
+    return protractorConfigFile.substring(0, protractorConfigFile.lastIndexOf("/"));
 }
 
 function getProjectTargetOptions(project: WorkspaceProject, buildTarget: string) {
@@ -97,3 +137,204 @@ function getProjectTargetOptions(project: WorkspaceProject, buildTarget: string)
     throw new SchematicsException(
         `Cannot determine project target configuration for: ${buildTarget}.`);
 }
+
+export function addPlugin(host: Tree, karmaConfigurationContext: KarmaConfigurationContext, pluginName: string): Change {
+    const properties = getProperties(host, karmaConfigurationContext);
+    const pluginProperty = properties.find(property => getPropertyAssignmentByName(property, 'plugins'));
+    
+    if (pluginProperty != null) {
+
+        const plugins = (pluginProperty.getChildren().find(n => n.kind === ts.SyntaxKind.ArrayLiteralExpression) as ts.ArrayLiteralExpression).elements;
+        const chromePlugin = plugins.find(e => hasPlugin(e as ts.CallExpression, pluginName));
+
+        if (chromePlugin == null) {
+            let toAdd = `
+      require('${pluginName}')`;
+            let pos = plugins.pos;
+
+            if (plugins.length > 0) {
+                pos = plugins[plugins.length - 1].pos;
+                toAdd = toAdd + ',';
+            }  
+
+            return new InsertChange(karmaConfigurationContext.karmaConfigFileName, pos, toAdd);
+        }
+    }
+
+    return new NoopChange();
+}
+
+export function addReport(host: Tree, karmaConfigurationContext: KarmaConfigurationContext, reportName: string): Change {
+
+    const properties = getProperties(host, karmaConfigurationContext);
+    const coverageIstanbulReporterProperty = properties.find(property => getPropertyAssignmentByName(property, 'coverageIstanbulReporter'));
+
+if (coverageIstanbulReporterProperty != null) {
+    const coverageIstanbulReporterProperties = findNodes(coverageIstanbulReporterProperty, ts.SyntaxKind.PropertyAssignment);
+    const reportProperty = coverageIstanbulReporterProperties.find(property => getPropertyAssignmentByName(property, 'reports'));
+
+    if (reportProperty != null) {
+        const reports = (reportProperty.getChildren().find(n => n.kind === ts.SyntaxKind.ArrayLiteralExpression) as ts.ArrayLiteralExpression).elements;
+        const chromePlugin = reports.find(x => (x as ts.StringLiteral).text == reportName);
+
+        if (chromePlugin == null) {
+            let toAdd = `'${reportName}'`;
+            let pos = reports.pos;
+
+            if (reports.length > 0) {
+                pos = reports[0].pos;
+                toAdd = toAdd + ',';
+            }
+
+            return new InsertChange(karmaConfigurationContext.karmaConfigFileName, pos, toAdd);
+        }
+    }
+}
+
+return new NoopChange();
+}
+
+export function addLauncher(host: Tree, karmaConfigurationContext: KarmaConfigurationContext): Change {
+
+    const properties = getProperties(host, karmaConfigurationContext);
+    const customLaunchersProperty = properties.find(property => getPropertyAssignmentByName(property, 'customLaunchers'));
+
+    const chromeHeadlessCI = `ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }`;
+
+    if (customLaunchersProperty == null) {
+    const toAdd = `
+    customLaunchers: {
+      ${chromeHeadlessCI}
+    },`;
+    
+        return new InsertChange(karmaConfigurationContext.karmaConfigFileName, properties[properties.length - 1].pos, toAdd);
+    } else {
+        const customLaunchersProperties = findNodes(customLaunchersProperty, ts.SyntaxKind.PropertyAssignment, 2);
+        const chromeHeadlessCIProperty = customLaunchersProperties.find(property => getPropertyAssignmentByName(property, 'ChromeHeadlessCI'));
+
+        if (chromeHeadlessCIProperty == null) {
+        let toAdd = `
+      ${chromeHeadlessCI}`;
+
+            let pos = customLaunchersProperty.end;
+            if (customLaunchersProperties.length > 1) {
+                pos = customLaunchersProperties[customLaunchersProperties.length - 1].pos;
+                toAdd = toAdd + ',';
+            } else {
+                pos = (findNodes(customLaunchersProperty, ts.SyntaxKind.ObjectLiteralExpression, 1)[0]).getStart() + 1; 
+            }
+
+            return new InsertChange(karmaConfigurationContext.karmaConfigFileName, pos, toAdd);
+        } else {
+            return new ReplaceChange(karmaConfigurationContext.karmaConfigFileName, chromeHeadlessCIProperty.getStart(), chromeHeadlessCIProperty.getText(), chromeHeadlessCI);
+        }
+    }
+}
+
+export function addReporter(host: Tree, karmaConfigurationContext: KarmaConfigurationContext, reporterName: string): Change {
+
+    const properties = getProperties(host, karmaConfigurationContext);
+    const reporterProperty = properties.find(property => getPropertyAssignmentByName(property, 'reporters'));
+
+if (reporterProperty != null) {
+
+    const reports = (reporterProperty.getChildren().find(n => n.kind === ts.SyntaxKind.ArrayLiteralExpression) as ts.ArrayLiteralExpression).elements;
+    const chromePlugin = reports.find(x => (x as ts.StringLiteral).text == reporterName);
+
+    if (chromePlugin == null) {
+        let toAdd = `'${reporterName}'`;
+        let pos = reports.pos;
+
+        if (reports.length > 0) {
+            pos = reports[0].pos;
+            toAdd = toAdd + ',';
+        }
+
+        return new InsertChange(karmaConfigurationContext.karmaConfigFileName, pos, toAdd);
+    }
+}
+
+return new NoopChange();
+}
+
+export function addJunitReporter(host: Tree, karmaConfigurationContext: KarmaConfigurationContext, options: Schema): Change {
+
+    const properties = getProperties(host, karmaConfigurationContext);
+    const reporterProperty = properties.find(property => getPropertyAssignmentByName(property, 'junitReporter'));
+
+    const junitReporterConfiguration = `junitReporter: { outputDir: '${getJunitReporterOutputDir(host, options)}' }`;
+
+    if (reporterProperty == null) {
+        const toAdd = `
+    ${junitReporterConfiguration},`;
+        return new InsertChange(karmaConfigurationContext.karmaConfigFileName, properties[0].pos, toAdd);
+    } else {
+        return new ReplaceChange(karmaConfigurationContext.karmaConfigFileName, reporterProperty.getStart(), reporterProperty.getText(), junitReporterConfiguration);
+    }
+}
+
+function getJunitReporterOutputDir(host: Tree, options: Schema) {
+    const workspace = getWorkspace(host);
+    const projectName = options.project;
+    const project = getProjectFromWorkspace(workspace, projectName);  
+
+    let pathDepth = project.root === '' ? '.' :  project.root.split('/').map(_ => '..').join('/');
+    return pathDepth + '/junit';
+}
+
+function getPropertyAssignmentByName(node: ts.Node, propertyName: string) {
+    const identifier = node.getChildren().find(n => n.kind === ts.SyntaxKind.Identifier) as ts.Identifier;
+    return identifier != null && identifier.escapedText == propertyName;
+}
+
+function hasPlugin(node: ts.CallExpression, pluginName: string) {
+    return node.arguments.findIndex(x => (x as ts.StringLiteral).text == pluginName) != -1;
+}
+
+function getProperties(host: Tree, karmaConfigurationContext: KarmaConfigurationContext) {
+    const tsCfgJsonContent = host.read(karmaConfigurationContext.karmaConfigFileName);
+    if (!tsCfgJsonContent) {
+        throw new Error('Invalid path: ' + karmaConfigurationContext.karmaConfigFileName);
+    }
+
+    let sourceFile = ts.createSourceFile(karmaConfigurationContext.karmaConfigFileName, tsCfgJsonContent.toString('utf-8'), ts.ScriptTarget.Latest, true);
+    return findNodes(sourceFile, ts.SyntaxKind.PropertyAssignment);
+}
+
+/**
+ * Find all nodes from the AST in the subtree of node of SyntaxKind kind.
+ * @param node
+ * @param kind
+ * @param max The maximum number of items to return.
+ * @return all nodes of kind, or [] if none is found
+ */
+export function findNodes(node: ts.Node, kind: ts.SyntaxKind, max = Infinity): ts.Node[] {
+    if (!node || max == 0) {
+      return [];
+    }
+  
+    const arr: ts.Node[] = [];
+    if (node.kind === kind) {
+      arr.push(node);
+      max--;
+    }
+    if (max > 0) {
+      for (const child of node.getChildren()) {
+        findNodes(child, kind, max).forEach(node => {
+          if (max > 0) {
+            arr.push(node);
+          }
+          max--;
+        });
+  
+        if (max <= 0) {
+          break;
+        }
+      }
+    }
+  
+    return arr;
+  }
