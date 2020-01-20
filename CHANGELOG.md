@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.14](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.14-alpha.0...v8.2.14) (2020-01-20)
+
+
+### Bug Fixes
+
+* fix debug configuration for multiple projects ([f08cf45](https://github.com/ObjectivityLtd/angular-schematics/commit/f08cf45eb3b4b82b9c22aee71eab06b847094a73))
+* fix karma configuration for CI pipeline ([f17d571](https://github.com/ObjectivityLtd/angular-schematics/commit/f17d5711f83e91b91bbf11bfa40c5e956232d64b))
+* fix trigger for azure-pipeline ([ad3e26c](https://github.com/ObjectivityLtd/angular-schematics/commit/ad3e26c46e76ab272dc88c2dd64e706b718e7b80))
+
+
+
+
+
+
 ## [8.2.14-alpha.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.1...v8.2.14-alpha.0) (2020-01-11)
 
 
@@ -46,6 +60,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * add addModuleToCoreModule, coreModuleExists methods ([247eb65](https://github.com/ObjectivityLtd/angular-schematics/commit/247eb65bdb596c8a4e2a4c6285cf04e18658fca0))
 * add core.module ([288d4ef](https://github.com/ObjectivityLtd/angular-schematics/commit/288d4ef0aa55b9b30f72ca713c294416017fd3e6))
 * change way how schematics are installed ([5cebb3e](https://github.com/ObjectivityLtd/angular-schematics/commit/5cebb3ea051c5b3d2ae646eea47152908d365b01))
-
-
-

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.14](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.14-alpha.0...v8.2.14) (2020-01-20)
+
+**Note:** Version bump only for package @objectivity/angular-schematic-app-insights
+
+
+
+
+
+
 ## [8.2.14-alpha.0](https://github.com/ObjectivityLtd/angular-schematics/compare/8.2.1...v8.2.14-alpha.0) (2020-01-11)
 
 
