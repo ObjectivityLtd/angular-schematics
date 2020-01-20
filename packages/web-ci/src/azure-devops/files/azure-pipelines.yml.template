@@ -34,7 +34,7 @@ steps:
     command: custom
     workingDir: '<%= workingDir %>' 
     verbose: false
-    customCommand: 'run test -- --watch=false --code-coverage --no-progress'
+    customCommand: 'run test -- --watch=false --code-coverage --no-progress --source-map=false --browsers=ChromeHeadlessCI'
 
 - task: PublishTestResults@2
   displayName: 'Publish unit test results'
