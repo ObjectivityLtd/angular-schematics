@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.15](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.14...v8.2.15) (2020-01-20)
+
+
+### Bug Fixes
+
+* update test step in azure pipeline ([4d65b3d](https://github.com/ObjectivityLtd/angular-schematics/commit/4d65b3d65454a6cb79ddd2f3b30be969cae72e0b))
+
+
+
+
+
 ## [8.2.14](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.14-alpha.0...v8.2.14) (2020-01-20)
 
 
