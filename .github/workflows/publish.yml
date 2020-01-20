@@ -19,6 +19,8 @@ jobs:
           echo ::set-output name=PREID::$(echo ${BASH_REMATCH[5]})
         fi
     - run: yarn install --frozen-lockfile
+    - name: Build packages
+      run: yarn build
     - name: Publish to NPMJS
       run: yarn ci:publish -- --dist-tag "${{ steps.vars.outputs.PREID }}" --preid "${{ steps.vars.outputs.PREID }}"
       env:
