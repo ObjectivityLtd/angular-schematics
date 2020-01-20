@@ -1,7 +1,8 @@
 name: 2.0.$(BuildID)
 
 trigger:
-- new-ui/develop
+- '*'
+-  '*/*'
 
 pool:
   name: Hosted VS2017
