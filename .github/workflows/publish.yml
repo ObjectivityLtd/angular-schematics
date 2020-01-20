@@ -20,6 +20,6 @@ jobs:
         fi
     - run: yarn install --frozen-lockfile
     - name: Publish to NPMJS
-      run: yarn publish-ci -- --dist-tag "${{ steps.vars.outputs.PREID }}" --preid "${{ steps.vars.outputs.PREID }}"
+      run: yarn ci:publish -- --dist-tag "${{ steps.vars.outputs.PREID }}" --preid "${{ steps.vars.outputs.PREID }}"
       env:
         NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
