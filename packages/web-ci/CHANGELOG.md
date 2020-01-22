@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.16](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.15...v8.2.16) (2020-01-22)
+
+
+### Features
+
+* override existing pipeline and protractor config files ([ffe9efa](https://github.com/ObjectivityLtd/angular-schematics/commit/ffe9efa1d93a34b3c20ce7c0ca5d43ed81e02abc))
+
+
+
+
+
+
 ## [8.2.15](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.14...v8.2.15) (2020-01-20)
 
 

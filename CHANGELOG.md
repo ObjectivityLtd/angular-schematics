@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.16](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.15...v8.2.16) (2020-01-22)
+
+
+### Bug Fixes
+
+* remove custom theme ([be9bc76](https://github.com/ObjectivityLtd/angular-schematics/commit/be9bc76a8e6819b68f238ab100ebf0504e4c2027))
+
+
+### Features
+
+* add overwriteIfExists rule ([459ab05](https://github.com/ObjectivityLtd/angular-schematics/commit/459ab0544d208656c963edb79d8696e56df874b0))
+* get version of packages from package.json ([0221751](https://github.com/ObjectivityLtd/angular-schematics/commit/0221751f1a9b2dbbf824109b164e98515a6b9062))
+* override existing pipeline and protractor config files ([ffe9efa](https://github.com/ObjectivityLtd/angular-schematics/commit/ffe9efa1d93a34b3c20ce7c0ca5d43ed81e02abc))
+
+
+
+
+
+
 ## [8.2.15](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.14...v8.2.15) (2020-01-20)
 
 

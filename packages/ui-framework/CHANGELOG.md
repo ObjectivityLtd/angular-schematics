@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.16](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.15...v8.2.16) (2020-01-22)
+
+
+### Bug Fixes
+
+* remove custom theme ([be9bc76](https://github.com/ObjectivityLtd/angular-schematics/commit/be9bc76a8e6819b68f238ab100ebf0504e4c2027))
+
+
+
+
+
+
 ## [8.2.15](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.14...v8.2.15) (2020-01-20)
 
 **Note:** Version bump only for package @objectivity/angular-schematic-ui-framework
