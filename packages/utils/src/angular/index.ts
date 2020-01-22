@@ -5,3 +5,4 @@ export * from './project-targets';
 export * from './version-agnostic-typescript';
 export * from './trim-slashes';
 export * from './project-root';
+export * from './merge-strategy';
