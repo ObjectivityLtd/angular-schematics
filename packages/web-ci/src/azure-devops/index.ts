@@ -1,4 +1,4 @@
-import { Rule, SchematicContext, Tree, chain, apply, url, applyTemplates, move, mergeWith, MergeStrategy } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain, apply, url, applyTemplates, move, mergeWith } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 import { overwriteIfExists } from '@objectivity/angular-schematic-utils';
 
