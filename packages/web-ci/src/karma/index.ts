@@ -6,6 +6,7 @@ import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject, InsertChange, ReplaceChange, NoopChange, Change } from "schematics-utilities";
 import { KarmaConfigurationContext } from './karma-configuration-context';
 import * as ts from 'typescript';
+import { overwriteIfExists } from '@objectivity/angular-schematic-utils';
 
 export function karma(options: Schema): Rule {
     return (tree: Tree, _context: SchematicContext) => {
@@ -15,7 +16,7 @@ export function karma(options: Schema): Rule {
             updateKarmaConfiguration(karmaConfigurationContext, options),
             addJUnitFolderToIgnore(options),
             installPackages(options),
-            createProtractorCiFile(karmaConfigurationContext, options)
+            createProtractorCiFile(tree, karmaConfigurationContext, options)
         ]);
     };
 }
@@ -50,12 +51,13 @@ function installPackages(_options: Schema): Rule {
     };
 }
 
-function createProtractorCiFile(karmaConfigurationContext: KarmaConfigurationContext, options: Schema) {
+function createProtractorCiFile(tree: Tree, karmaConfigurationContext: KarmaConfigurationContext, options: Schema) {
     const templateSource = apply(url('./files'), [
         applyTemplates({
             ...options
         }),
-        move(karmaConfigurationContext.protractorConfigPath)
+        move(karmaConfigurationContext.protractorConfigPath),
+        overwriteIfExists(tree)
     ]);
     return chain([
         mergeWith(templateSource)
