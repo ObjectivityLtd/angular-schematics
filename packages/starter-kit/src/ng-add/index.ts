@@ -1,11 +1,11 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 import { SchematicsRunner } from './schematics-runner';
+const { version: appVersion } = require('../../package.json')
 
 export default function (options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
-
-    const version = '^8.2';
+    const version = appVersion;
     const runner = new SchematicsRunner(tree, context);
     if (options.setup) {
       runner.registerSchematic('@objectivity/angular-schematic-web-setup', version, {});
