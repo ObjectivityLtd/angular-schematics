@@ -1,13 +1,9 @@
 ---
 name: Bug report
 about: Report a bug in angular-schematics
-title: ''
-labels: ''
-assignees: ''
-
 ---
 
-**Schematic (mark with an `x`) **
+**Schematic (mark with an `x`)**
 <!-- Can you pin-point the schematic or schematics that are effected by this bug? -->
 - [ ] ui-framework
 - [ ] web-ci
