@@ -1,10 +1,6 @@
 ---
 name: Feature request
 about: Suggest a feature for angular-schematics
-title: ''
-labels: ''
-assignees: ''
-
 ---
 
 **Schematic (mark with an `x`)**
