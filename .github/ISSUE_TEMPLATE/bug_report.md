@@ -1,6 +1,10 @@
 ---
 name: Bug report
 about: Report a bug in angular-schematics
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 **Schematic (mark with an `x`)**
