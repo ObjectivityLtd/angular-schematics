@@ -1,6 +1,6 @@
 import { Rule, SchematicContext, chain, SchematicsException } from "@angular-devkit/schematics";
 import { Tree } from "@angular-devkit/schematics/src/tree/interface";
-import { getWorkspace, getProjectFromWorkspace, readIntoSourceFile, getSourceNodes } from "schematics-utilities";
+import { getWorkspace, getProjectFromWorkspace, getSourceNodes } from "schematics-utilities";
 import { ts } from "./version-agnostic-typescript";
 import { WorkspaceProject } from "@angular-devkit/core/src/experimental/workspace";
 import { getProjectTargetConfigurations } from "./project-targets";
@@ -82,4 +82,13 @@ export function updateEnvironmentConfiguration(project: string, insertion: strin
     }
   
     return fileReplacement.replace;
-  }
+}
+
+function readIntoSourceFile(host: Tree, modulePath: string) {
+    const text = host.read(modulePath);
+    if (text === null) {
+        throw new SchematicsException(`File ${modulePath} does not exist.`);
+    }
+
+    return ts.createSourceFile(modulePath, text.toString('utf-8'), ts.ScriptTarget.Latest, true);
+}

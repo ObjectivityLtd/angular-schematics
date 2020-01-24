@@ -3,7 +3,7 @@ import { Schema } from './schema';
 import { karmaJunitReporterPkg } from "../dependences";
 import { normalize } from '@angular-devkit/core';
 import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
-import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject, InsertChange, ReplaceChange, NoopChange, Change } from "schematics-utilities";
+import { getWorkspace, getProjectFromWorkspace, WorkspaceProject, InsertChange, ReplaceChange, NoopChange, Change, NodeDependencyType, addPackageJsonDependency } from "schematics-utilities";
 import { KarmaConfigurationContext } from './karma-configuration-context';
 import * as ts from 'typescript';
 import { overwriteIfExists } from '@objectivity/angular-schematic-utils';
@@ -41,7 +41,7 @@ function addJUnitFolderToIgnore(_options: Schema): Rule {
 
 function installPackages(_options: Schema): Rule {
     return (host: Tree, context: SchematicContext) => {
-        addPackageToPackageJson(host, 'dependencies', karmaJunitReporterPkg.pkg, karmaJunitReporterPkg.version);
+        addPackageJsonDependency(host, { type: NodeDependencyType.Default, version: karmaJunitReporterPkg.version, name: karmaJunitReporterPkg.pkg });
 
         if (_options.skipInstall !== true) {
             context.addTask(new NodePackageInstallTask());

@@ -1,10 +1,11 @@
-import { Rule, SchematicContext, Tree, chain, apply, url, move, mergeWith } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain, apply, url, move, mergeWith, SchematicsException } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject, getStylesPath } from 'schematics-utilities';
+import { getWorkspace, getProjectFromWorkspace, WorkspaceProject, NodeDependencyType, addPackageJsonDependency } from 'schematics-utilities';
 import { bootstrapPkg } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { red, italic } from '@angular-devkit/core/src/terminal';
 import { buildRootPath } from '@objectivity/angular-schematic-utils';
+import { normalize } from '@angular-devkit/core';
 
 export function bootstrapMini(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
@@ -13,7 +14,7 @@ export function bootstrapMini(options: Schema): Rule {
         const projectName = options.project;
         const workspaceProject = getProjectFromWorkspace(workspace, projectName);
 
-        addPackageToPackageJson(tree, 'dependencies', bootstrapPkg.pkg, bootstrapPkg.version);
+        addPackageJsonDependency(tree, { type: NodeDependencyType.Default, version: bootstrapPkg.version, name: bootstrapPkg.pkg });
 
         if (options.skipInstall !== true) {
             context.addTask(new NodePackageInstallTask());
@@ -69,4 +70,28 @@ function updateAppStyle(workspaceProject: WorkspaceProject) {
         host.commitUpdate(recorder);
     };
 }
+
+export function getStylesPath(project: WorkspaceProject): string {
+    const targets = (<any>project).targets || project.architect;
+    const buildTarget = targets['build'];
+  
+    if (buildTarget.options && buildTarget.options.styles && buildTarget.options.styles.length) {
+      const styles = buildTarget.options.styles.map((s: { input: any; }) => (typeof s === 'string' ? s : s.input));
+  
+      // First, see if any of the assets is called "styles.(le|sc|c)ss", which is the default
+      // "main" style sheet.
+      const defaultMainStylePath = styles.find((a: string) => /styles\.(c|le|sc)ss/.test(a));
+      if (defaultMainStylePath) {
+        return normalize(defaultMainStylePath);
+      }
+  
+      // If there was no obvious default file, use the first style asset.
+      const fallbackStylePath = styles.find((a: string) => /\.(c|le|sc)ss/.test(a));
+      if (fallbackStylePath) {
+        return normalize(fallbackStylePath);
+      }
+    }
+  
+    throw new SchematicsException('No style files could be found into which a theme could be added');
+  }
 
