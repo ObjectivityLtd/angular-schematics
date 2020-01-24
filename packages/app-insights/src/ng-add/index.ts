@@ -1,10 +1,11 @@
 import { Rule, SchematicContext, Tree, chain, branchAndMerge } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 import { updateEnvironmentConfiguration, coreModuleExists, addModuleToCoreModule } from '@objectivity/angular-schematic-utils';
-import { addPackageToPackageJson, getWorkspace, getProjectFromWorkspace, WorkspaceProject, addModuleImportToRootModule } from 'schematics-utilities';
+import { getWorkspace, getProjectFromWorkspace, WorkspaceProject, addModuleImportToRootModule } from 'schematics-utilities';
 import { ngApplicationInsights } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
+import { addPackageJsonDependency, NodeDependencyType } from 'schematics-utilities';
 
 export default function (options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -53,8 +54,8 @@ function addMonitorModuleToRootModule(workspaceProject: WorkspaceProject): Rule 
 }
 
 function addExternaPackage(options: Schema): Rule {
-  return (tree: Tree, context: SchematicContext) => {
-    addPackageToPackageJson(tree, 'dependencies', ngApplicationInsights.pkg, ngApplicationInsights.version);
+    return (tree: Tree, context: SchematicContext) => {
+        addPackageJsonDependency(tree, { type: NodeDependencyType.Default, version: ngApplicationInsights.version, name: ngApplicationInsights.pkg });
 
     if (options.skipInstall !== true) {
       context.addTask(new NodePackageInstallTask());

@@ -1,6 +1,6 @@
 import { Tree } from "@angular-devkit/schematics/src/tree/interface";
 import { SchematicContext, TaskId } from "@angular-devkit/schematics";
-import { addPackageToPackageJson } from "schematics-utilities";
+import { addPackageJsonDependency, NodeDependencyType } from 'schematics-utilities';
 import { RunSchematicTask, NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 import { green } from "@angular-devkit/core/src/terminal";
 
@@ -12,7 +12,7 @@ export class SchematicsRunner {
     }
 
     registerSchematic<T>(pkg: string, version: string, options: T) {
-        addPackageToPackageJson(this.tree, 'devDependencies', pkg, version);
+        addPackageJsonDependency(this.tree, { type: NodeDependencyType.Dev, version: version, name: pkg });
         this.schematicTasksToRun.push(new RunSchematicTask<T>(pkg, 'ng-add', options));
 
         if (options && (options as any).skipInstall != null) {

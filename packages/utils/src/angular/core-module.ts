@@ -23,7 +23,7 @@ export function addModuleToCoreModule(host: Tree, moduleName: string, src: strin
     if (!coreModulePath) {
         throw new SchematicsException(`Module not found: ${coreModulePath}`);
     }
-    const moduleSource = getSourceFile(host, coreModulePath);
+    const moduleSource = getSourceFile(host, coreModulePath) as any; // tsThirdParty.SourceFile;
 
     let changes = [
         ...addImportToModule(moduleSource, coreModulePath, moduleName, src),
