@@ -1,6 +1,6 @@
 {
   "name": "@objectivity/angular-schematic-ide",
-  "version": "8.2.16",
+  "version": "8.2.17",
   "description": "Configures IDE, adds common extensions and configurations",
   "repository": "ObjectivityLtd/angular-schematics",
   "bugs": {
