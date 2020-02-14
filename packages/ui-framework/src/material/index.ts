@@ -8,7 +8,7 @@ export function material(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
         const materialOptions = {
             ...options,
-            gestures: true,
+            typography: true,
             animations: true
         }
 
