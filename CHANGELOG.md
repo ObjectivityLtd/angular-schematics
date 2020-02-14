@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.17...v9.0.0) (2020-02-14)
+
+
+### Features
+
+* upgrade to v9 ([602150b](https://github.com/ObjectivityLtd/angular-schematics/commit/602150bd090663842368dfe5bb8cfc6020625d80))
+
+
+
+
+
 ## [8.2.17](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.16...v8.2.17) (2020-02-11)
 
 **Note:** Version bump only for package root
