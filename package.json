@@ -43,7 +43,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@angular-devkit/schematics-cli": "^0.803.23",
+    "@angular-devkit/schematics-cli": "^0.901.7",
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "commitizen": "^4.0.3",
