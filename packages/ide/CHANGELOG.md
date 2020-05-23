@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.1.6](https://github.com/ObjectivityLtd/angular-schematics/compare/v9.0.0...v9.1.6) (2020-05-23)
+
+
+### Bug Fixes
+
+* remove serrings template ([a6dc1cf](https://github.com/ObjectivityLtd/angular-schematics/commit/a6dc1cf49b1608bd7394bea48f911253ca08e866))
+
+
+### Features
+
+* add settings template vscode ([0c831e5](https://github.com/ObjectivityLtd/angular-schematics/commit/0c831e5591e1b578eb50e9eaaf4910a02a027d37))
+* add settings template vscode ([96c7fed](https://github.com/ObjectivityLtd/angular-schematics/commit/96c7fed7c5e972d6b097612fc7ee1206b94f1aba))
+* spell checker extension vs code ([ef6b29e](https://github.com/ObjectivityLtd/angular-schematics/commit/ef6b29e46c02995b2e3c2cd14d7ee974cde80bb7))
+
+
+
+
+
+
 # [9.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v8.2.17...v9.0.0) (2020-02-14)
 
 **Note:** Version bump only for package @objectivity/angular-schematic-ide
