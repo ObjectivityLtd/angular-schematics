@@ -5,5 +5,5 @@ export const bootstrapPkg = {
 
 export const materialPkg = {
     pkg: '@angular/material',
-    version: '^9.0.0'
+    version: '^10.0.0'
 };

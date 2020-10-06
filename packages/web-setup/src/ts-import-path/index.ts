@@ -1,8 +1,8 @@
 import { Rule, SchematicContext, Tree, chain } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { parseJsonAst } from '@angular-devkit/core';
-import { appendPropertyInAstObject, findPropertyInAstObject, getWorkspace, getProjectFromWorkspace, buildDefaultPath } from 'schematics-utilities';
+import { getWorkspace, getProjectFromWorkspace, buildDefaultPath } from 'schematics-utilities';
 import { trimSlashes, getProjectEnvironmentPath } from '@objectivity/angular-schematic-utils';
+import { JSONFile } from './json-file';
 
 export function tsImportPath(options: Schema): Rule {
     return (_tree: Tree, _context: SchematicContext) => {
@@ -28,48 +28,10 @@ function updateTsConfig(options: Schema): Rule {
             [projectEnvKey]: [`${projectEnvPath}/*`],
         };
 
-        const tsConfigPath = 'tsconfig.json';
-        try {
-            const tsCfgJsonContent = tree.read(tsConfigPath);
-            if (!tsCfgJsonContent) {
-                throw new Error('Invalid path: ' + tsConfigPath);
-            }
-
-            const tsCfgAst = parseJsonAst(tsCfgJsonContent.toString('utf-8'));
-            if (tsCfgAst.kind !== 'object') {
-                throw new Error('Invalid tsconfig content.');
-            }
-
-            const compilerOptionsAstNode = findPropertyInAstObject(tsCfgAst, 'compilerOptions');
-
-            if (!compilerOptionsAstNode || compilerOptionsAstNode.kind !== 'object') {
-                throw new Error('Invalid compilerOptions content.');
-            }
-
-            const pathsAstNode = findPropertyInAstObject(compilerOptionsAstNode, 'paths');
-
-            const recorder = tree.beginUpdate(tsConfigPath);
-
-            if(!pathsAstNode) {
-                appendPropertyInAstObject(recorder, compilerOptionsAstNode, "paths", pathToProject, 4);
-
-            } else
-            {
-                            
-                if (pathsAstNode.kind !== 'object') {
-                    throw new Error('Invalid paths content.');
-                }
-
-                appendPropertyInAstObject(recorder, pathsAstNode, projectKey, pathToProject[projectKey], 4);
-                appendPropertyInAstObject(recorder, pathsAstNode, projectEnvKey, pathToProject[projectEnvKey], 4);
-            }
-            tree.commitUpdate(recorder);
-
-            return tree;
-
-        } catch(e) {
-            console.error(e);
-            throw new Error(`Could not update ${tsConfigPath}`);
+        const json = new JSONFile(tree, 'tsconfig.json');
+    
+        if (pathToProject) {
+            json.modify(['compilerOptions', 'paths'], pathToProject);
         }
-    };
+    }
 }
