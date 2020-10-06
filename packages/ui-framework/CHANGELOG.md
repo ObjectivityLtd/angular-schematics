@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.3](https://github.com/ObjectivityLtd/angular-schematics/compare/v9.1.6...v10.1.3) (2020-10-06)
+
+
+### Features
+
+* upgrade to v10 ([c6b9be4](https://github.com/ObjectivityLtd/angular-schematics/commit/c6b9be498010b6386299f07f90e9534342fdad4e))
+
+
+
+
+
 ## [9.1.6](https://github.com/ObjectivityLtd/angular-schematics/compare/v9.0.0...v9.1.6) (2020-05-23)
 
 **Note:** Version bump only for package @objectivity/angular-schematic-ui-framework
