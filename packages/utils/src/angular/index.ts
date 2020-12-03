@@ -6,3 +6,4 @@ export * from './version-agnostic-typescript';
 export * from './trim-slashes';
 export * from './project-root';
 export * from './merge-strategy';
+export * from './app-module';
