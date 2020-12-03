@@ -1,7 +1,7 @@
 import { Rule, SchematicContext, Tree, chain, branchAndMerge } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { updateEnvironmentConfiguration, coreModuleExists, addModuleToCoreModule } from '@objectivity/angular-schematic-utils';
-import { getWorkspace, getProjectFromWorkspace, WorkspaceProject, addModuleImportToRootModule } from 'schematics-utilities';
+import { updateEnvironmentConfiguration, coreModuleExists, addModuleToCoreModule, addModuleImportToRootModule } from '@objectivity/angular-schematic-utils';
+import { getWorkspace, getProjectFromWorkspace, WorkspaceProject } from 'schematics-utilities';
 import { ngApplicationInsights } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
