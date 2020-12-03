@@ -1,3 +1,3 @@
 export interface Schema {
-    vscode: string;
+    vscode: boolean;
 }
