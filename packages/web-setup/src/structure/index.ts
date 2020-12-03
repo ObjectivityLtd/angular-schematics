@@ -1,7 +1,7 @@
-import { Rule, SchematicContext, Tree, chain, apply, url, applyTemplates, mergeWith, move, SchematicsException } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain, apply, url, applyTemplates, mergeWith, move } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { getWorkspace, getProjectFromWorkspace, buildDefaultPath, getSourceFile, addImportToModule, WorkspaceProject, getAppModulePath } from 'schematics-utilities';
-import { getProjectMainFile } from 'schematics-utilities/dist/cdk';
+import { getWorkspace, getProjectFromWorkspace, buildDefaultPath } from 'schematics-utilities';;
+import { addModuleImportToRootModule } from '@objectivity/angular-schematic-utils';
   
 export function structure(options: Schema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -21,27 +21,6 @@ export function structure(options: Schema): Rule {
       addCoreModule(options)
     ]);
   };
-}
-
-/* https://github.com/nitayneeman/schematics-utilities/issues/23 */
-function addModuleImportToRootModule(host: Tree, moduleName: string, src: string, project: WorkspaceProject) {
-    const modulePath = getAppModulePath(host, getProjectMainFile(project));
-    const moduleSource = getSourceFile(host, modulePath);
-  
-    if (!moduleSource) {
-      throw new SchematicsException(`Module not found: ${modulePath}`);
-    }
-
-    const changes = addImportToModule(<any>moduleSource, modulePath, moduleName, src);
-    const recorder = host.beginUpdate(modulePath);
-  
-    changes.forEach(change => {
-      {
-        recorder.insertLeft((<any>change).pos, (<any>change).toAdd);
-      }
-    });
-  
-    host.commitUpdate(recorder);
 }
 
 function addCoreModule(options: Schema): Rule {
