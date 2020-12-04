@@ -7,3 +7,4 @@ export * from './trim-slashes';
 export * from './project-root';
 export * from './merge-strategy';
 export * from './app-module';
+export * from './json-file';

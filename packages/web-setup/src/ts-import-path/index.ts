@@ -1,8 +1,7 @@
 import { Rule, SchematicContext, Tree, chain } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 import { getWorkspace, getProjectFromWorkspace, buildDefaultPath } from 'schematics-utilities';
-import { trimSlashes, getProjectEnvironmentPath } from '@objectivity/angular-schematic-utils';
-import { JSONFile } from './json-file';
+import { trimSlashes, getProjectEnvironmentPath, JSONFile } from '@objectivity/angular-schematic-utils';
 
 export function tsImportPath(options: Schema): Rule {
     return (_tree: Tree, _context: SchematicContext) => {
