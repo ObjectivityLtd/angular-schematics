@@ -1,8 +1,8 @@
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
+import { JSONFile } from '@objectivity/angular-schematic-utils';
 import { createSandboxAsync } from '@objectivity/angular-schematic-utils/testing';
 import * as path from 'path';
 const collectionPath = path.join(__dirname, '../collection.json');
-import { JSONFile } from './json-file';
 
 describe(`web-setup`, () => {
     const testRunner = new SchematicTestRunner('schematics', collectionPath);
