@@ -17,7 +17,7 @@ jobs:
       run: yarn
     - name: Bootstrap & Build packages
       run: yarn ci:build 
-    - name: RUn Tests
+    - name: Run Unit Tests
       run: yarn ci:test        
     - name: Execute the schematic against the sandbox
       run: yarn ci:sandbox
