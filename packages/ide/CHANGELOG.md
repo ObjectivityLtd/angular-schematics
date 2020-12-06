@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.1.3...v10.2.0) (2020-12-06)
+
+
+### Bug Fixes
+
+* fix debugging unit tests ([d19e117](https://github.com/ObjectivityLtd/angular-schematics/commit/d19e117271ecc2f4b56dd931b2fd192f28f6fbd6))
+* fix schema definition ([30c2f41](https://github.com/ObjectivityLtd/angular-schematics/commit/30c2f4117eefc8a81cbe8b80447668f34c9b2d7d))
+
+
+
+
+
 ## [10.1.3](https://github.com/ObjectivityLtd/angular-schematics/compare/v9.1.6...v10.1.3) (2020-10-06)
 
 **Note:** Version bump only for package @objectivity/angular-schematic-ide

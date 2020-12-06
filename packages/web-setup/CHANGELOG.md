@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.1.3...v10.2.0) (2020-12-06)
+
+
+### Features
+
+* moves JSONFile class to utils project ([0d300f4](https://github.com/ObjectivityLtd/angular-schematics/commit/0d300f46a414d7cd40113709bece808ff20525bd))
+
+
+
+
+
 ## [10.1.3](https://github.com/ObjectivityLtd/angular-schematics/compare/v9.1.6...v10.1.3) (2020-10-06)
 
 

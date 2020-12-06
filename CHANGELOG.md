@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.1.3...v10.2.0) (2020-12-06)
+
+
+### Bug Fixes
+
+* fix  addModuleImportToRootModule method ([e52f61d](https://github.com/ObjectivityLtd/angular-schematics/commit/e52f61d369652bc99a68f264758fc4a3e36c0d21))
+* fix debugging unit tests ([d19e117](https://github.com/ObjectivityLtd/angular-schematics/commit/d19e117271ecc2f4b56dd931b2fd192f28f6fbd6))
+* fix importing core module to root module ([421a16e](https://github.com/ObjectivityLtd/angular-schematics/commit/421a16e6168620c3063d2f6949a7deb5d3c6b0cf))
+* fix schema definition ([30c2f41](https://github.com/ObjectivityLtd/angular-schematics/commit/30c2f4117eefc8a81cbe8b80447668f34c9b2d7d))
+
+
+### Features
+
+* adds functions for unit tests ([55fd1b7](https://github.com/ObjectivityLtd/angular-schematics/commit/55fd1b7ff739e2089e01ba9d1cf33aa60b6fdca2))
+* moves JSONFile class to utils project ([0d300f4](https://github.com/ObjectivityLtd/angular-schematics/commit/0d300f46a414d7cd40113709bece808ff20525bd))
+
+
+
+
+
 ## [10.1.3](https://github.com/ObjectivityLtd/angular-schematics/compare/v9.1.6...v10.1.3) (2020-10-06)
 
 
