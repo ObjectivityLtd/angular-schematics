@@ -13,7 +13,13 @@
             "request": "launch",
             "name": "ng test (<%= project.name %>)",
             "url": "<%= project.testProtocol %>://<%= project.testDomain %>:<%= project.testPort %>/debug.html",
-            "webRoot": "<%= project.webRoot %>"
+            "webRoot": "<%= project.webRoot %>",
+            "port": 9222,
+            "timeout": 600000,
+            "sourceMaps": true,
+            "pathMapping": {
+                "/_karma_webpack_": "<%= project.webRoot %>"
+            }
         },<% } %>
     ]
 }
