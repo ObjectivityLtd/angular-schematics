@@ -1,6 +1,6 @@
 {
   "name": "@objectivity/angular-schematic-ide",
-  "version": "10.1.3",
+  "version": "10.2.0",
   "description": "Configures IDE, adds common extensions and configurations",
   "repository": "ObjectivityLtd/angular-schematics",
   "bugs": {
@@ -35,6 +35,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@objectivity/angular-schematic-utils": "^10.1.3"
+    "@objectivity/angular-schematic-utils": "^10.2.0"
   }
 }

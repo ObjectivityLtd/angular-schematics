@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.1.3...v10.2.0) (2020-12-06)
+
+**Note:** Version bump only for package @objectivity/angular-schematic-starter-kit
+
+
+
+
+
 ## [10.1.3](https://github.com/ObjectivityLtd/angular-schematics/compare/v9.1.6...v10.1.3) (2020-10-06)
 
 **Note:** Version bump only for package @objectivity/angular-schematic-starter-kit

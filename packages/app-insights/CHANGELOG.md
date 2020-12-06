@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.1.3...v10.2.0) (2020-12-06)
+
+
+### Bug Fixes
+
+* fix importing core module to root module ([421a16e](https://github.com/ObjectivityLtd/angular-schematics/commit/421a16e6168620c3063d2f6949a7deb5d3c6b0cf))
+
+
+
+
+
 ## [10.1.3](https://github.com/ObjectivityLtd/angular-schematics/compare/v9.1.6...v10.1.3) (2020-10-06)
 
 
