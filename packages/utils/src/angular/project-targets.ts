@@ -6,8 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {WorkspaceProject} from '@angular-devkit/core/src/experimental/workspace';
 import {SchematicsException} from '@angular-devkit/schematics';
+import { WorkspaceProject } from 'schematics-utilities';
 
 /** Resolves the architect configurations for the build target of the given project. */
 export function getProjectTargetConfigurations(project: WorkspaceProject, buildTarget: string) {

@@ -2,7 +2,6 @@ import { Tree } from "@angular-devkit/schematics/src/tree/interface";
 import { SchematicContext, TaskId } from "@angular-devkit/schematics";
 import { addPackageJsonDependency, NodeDependencyType } from 'schematics-utilities';
 import { RunSchematicTask, NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
-import { green } from "@angular-devkit/core/src/terminal";
 
 export class SchematicsRunner {
     private schematicTasksToRun: any[] = [];
@@ -29,7 +28,7 @@ export class SchematicsRunner {
         console.log('s', this.schematicTasksToRun.length);
         let installTaskIds = [this.context.addTask(new NodePackageInstallTask())];
 
-        console.info(green(`Executing angular schematics...`));
+        console.info(`Executing angular schematics...`);
 
         let executeTaskIds: TaskId[] = [];
 

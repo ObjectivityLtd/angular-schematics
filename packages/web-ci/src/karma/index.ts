@@ -3,10 +3,11 @@ import { Schema } from './schema';
 import { karmaJunitReporterPkg } from "../dependences";
 import { normalize } from '@angular-devkit/core';
 import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
-import { getWorkspace, getProjectFromWorkspace, WorkspaceProject, InsertChange, ReplaceChange, NoopChange, Change, NodeDependencyType, addPackageJsonDependency } from "schematics-utilities";
+import { getWorkspace, WorkspaceProject, InsertChange, ReplaceChange, NoopChange, Change, NodeDependencyType, addPackageJsonDependency } from "schematics-utilities";
 import { KarmaConfigurationContext } from './karma-configuration-context';
 import * as ts from 'typescript';
 import { overwriteIfExists } from '@objectivity/angular-schematic-utils';
+import { getProjectFromWorkspace } from '@objectivity/angular-schematic-utils';
 
 export function karma(options: Schema): Rule {
     return (tree: Tree, _context: SchematicContext) => {
