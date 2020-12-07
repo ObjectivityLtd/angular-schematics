@@ -1,11 +1,12 @@
 import { Rule, SchematicContext, Tree, chain, branchAndMerge } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 import { updateEnvironmentConfiguration, coreModuleExists, addModuleToCoreModule, addModuleImportToRootModule } from '@objectivity/angular-schematic-utils';
-import { getWorkspace, getProjectFromWorkspace, WorkspaceProject } from 'schematics-utilities';
+import { getWorkspace, WorkspaceProject } from 'schematics-utilities';
 import { ngApplicationInsights } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { addPackageJsonDependency, NodeDependencyType } from 'schematics-utilities';
+import { getProjectFromWorkspace } from '@objectivity/angular-schematic-utils';
 
 export default function (options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {

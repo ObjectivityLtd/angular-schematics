@@ -1,9 +1,9 @@
 import { Rule, SchematicContext, chain, SchematicsException } from "@angular-devkit/schematics";
 import { Tree } from "@angular-devkit/schematics/src/tree/interface";
-import { getWorkspace, getProjectFromWorkspace, getSourceNodes } from "schematics-utilities";
+import { getWorkspace, getSourceNodes, WorkspaceProject } from "schematics-utilities";
 import { ts } from "./version-agnostic-typescript";
-import { WorkspaceProject } from "@angular-devkit/core/src/experimental/workspace";
 import { getProjectTargetConfigurations } from "./project-targets";
+import { getProjectFromWorkspace } from "./get-project";
 
 export function updateEnvironmentConfiguration(project: string, insertion: string): Rule {
     return (tree: Tree, _context: SchematicContext) => {

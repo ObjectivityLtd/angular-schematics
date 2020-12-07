@@ -1,11 +1,11 @@
 import { Rule, SchematicContext, Tree, chain, apply, url, move, mergeWith, SchematicsException } from '@angular-devkit/schematics';
 import { Schema } from './schema';
-import { getWorkspace, getProjectFromWorkspace, WorkspaceProject, NodeDependencyType, addPackageJsonDependency } from 'schematics-utilities';
+import { getWorkspace, WorkspaceProject, NodeDependencyType, addPackageJsonDependency } from 'schematics-utilities';
 import { bootstrapPkg } from '../dependences';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { red, italic } from '@angular-devkit/core/src/terminal';
 import { buildRootPath } from '@objectivity/angular-schematic-utils';
 import { normalize } from '@angular-devkit/core';
+import { getProjectFromWorkspace } from '@objectivity/angular-schematic-utils';
 
 export function bootstrapMini(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
@@ -45,14 +45,14 @@ function updateAppStyle(workspaceProject: WorkspaceProject) {
         const styleFilePath = getStylesPath(workspaceProject);
 
         if (!styleFilePath) {
-            console.warn(red(`Could not find the default style file for this project.`));
+            console.warn(`Could not find the default style file for this project.`);
             return;
         }
 
         const buffer = host.read(styleFilePath);
 
         if (!buffer) {
-            console.warn(red(`Could not read the default style file within the project (${italic(styleFilePath)})`));
+            console.warn(`Could not read the default style file within the project (${styleFilePath})`);
             return;
         }
 

@@ -3,8 +3,9 @@ import * as path from 'path';
 import { Schema } from './schema';
 const collectionPath = path.join(__dirname, '../collection.json');
 import { getProjectTargetOptions } from '@objectivity/angular-schematic-utils';
-import { getProjectFromWorkspace, getWorkspace } from 'schematics-utilities';
+import { getWorkspace } from 'schematics-utilities';
 import { createSandboxAsync, createSandboxWorkspaceAsync } from '@objectivity/angular-schematic-utils/testing';
+import { getProjectFromWorkspace } from '@objectivity/angular-schematic-utils';
 
 describe(`web-setup`, () => {
     const testRunner = new SchematicTestRunner('schematics', collectionPath);
