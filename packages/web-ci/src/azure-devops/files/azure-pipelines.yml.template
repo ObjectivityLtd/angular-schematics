@@ -1,15 +1,11 @@
-name: 2.0.$(BuildID)
+name: <%= capitalize(project) %> Angular App $(BuildID)
 
 trigger:
 - '*'
 -  '*/*'
 
 pool:
-  name: Hosted VS2017
-  demands:
-  - msbuild
-  - visualstudio
-  - vstest
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: Npm@1
@@ -26,32 +22,39 @@ steps:
     command: custom
     workingDir: '<%= workingDir %>'
     verbose: false
-    customCommand: 'run build -- --prod --aot -vc -cc --buildOptimizer'
+    customCommand: 'run build:ci'
 
 - task: Npm@1
-  displayName: 'Run unit tests'
+  displayName: 'Run Unit Tests'
   inputs:
     command: custom
-    workingDir: '<%= workingDir %>' 
+    workingDir: '<%= workingDir %>'
+    customCommand: 'run test:ci'
     verbose: false
-    customCommand: 'run test -- --watch=false --code-coverage --no-progress --source-map=false --browsers=ChromeHeadlessCI'
-
-- task: PublishTestResults@2
-  displayName: 'Publish unit test results'
-  inputs:
-    testResultsFormat: JUnit
-    testResultsFiles: '**/TESTS-*.xml'
-    mergeTestResults: true
-    testRunTitle: 'wwwroot tests'
-
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '<%= workingDir %>/coverage/<%= project %>/cobertura-coverage.xml'
 
 - task: Npm@1
-  displayName: 'Run lint'
+  displayName: 'Run E2E Tests'
+  inputs:
+    command: custom
+    customCommand: 'run e2e:ci'
+    workingDir: '<%= workingDir %>'
+    verbose: false
+
+- task: PublishTestResults@2
+  displayName: 'Publish Tests Results'
+  inputs:
+    testResultsFormat: JUnit
+    testResultsFiles: '$(Build.SourcesDirectory)/junit/**/*.xml'
+    mergeTestResults: true
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Code Coverage'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/sandbox/cobertura-coverage.xml'
+
+- task: Npm@1
+  displayName: 'Run Code Analysis'
   inputs:
     command: custom
     workingDir: '<%= workingDir %>' 
@@ -69,5 +72,5 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
+    PathtoPublish: '$(build.ArtifactStagingDirectory)'
     ArtifactName: '<%= project %>'

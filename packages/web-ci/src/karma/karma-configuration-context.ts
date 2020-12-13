@@ -1,4 +1,5 @@
 export interface KarmaConfigurationContext {
-    karmaConfigFileName: string; //e.g. "/karma.config.js"
+    karmaConfigPath: string;
     protractorConfigPath: string;
+    rootPath: string;
 }
