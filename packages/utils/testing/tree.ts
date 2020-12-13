@@ -7,7 +7,7 @@ export async function createSandboxAsync(testRunner: SchematicTestRunner) {
     const workspaceOptions: WorkspaceOptions = {
         name: 'sandbox',
         newProjectRoot: '',
-        version: '6.0.0'
+        version: '11.0.0'
     };
 
     const appOptions: ApplicationOptions = {
