@@ -27,7 +27,7 @@ describe(`ui-framework`, () => {
 
         it(`should update the package.json`, async () => {
             const tree= await testRunner.runSchematicAsync<Schema>('material', { project: 'sandbox', skipInstall: false }, appTree).toPromise();
-            expect(packageDependency(tree, '@angular/material')).toBe('^10.0.0');
+            expect(packageDependency(tree, '@angular/material')).toBe('^11.0.0');
         });
 
         it(`should install packages`, async () => {
