@@ -46,6 +46,7 @@
     "@angular-devkit/schematics-cli": "^0.1100.3",
     "@commitlint/cli": "10.0.0",
     "@commitlint/config-conventional": "10.0.0",
+    "@schematics/angular": "11.0.0",
     "commitizen": "^4.2.2",
     "cz-conventional-changelog": "^3.3.0",
     "git-cz": "^4.7.5",
