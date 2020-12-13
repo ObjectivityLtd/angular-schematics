@@ -1,0 +1,28 @@
+const config = require('./protractor.conf').config;
+const { JUnitXmlReporter } = require('jasmine-reporters');
+const puppeteer = require('puppeteer');
+
+var defaultPrepare = config.onPrepare;
+
+process.env.CHROME_BIN = puppeteer.executablePath();
+console.log(process.env.CHROME_BIN)
+
+config.capabilities = {
+  browserName: 'chrome',
+  chromeOptions: {
+    args: ['--headless', '--no-sandbox', '--disable-gpu', '--window-size=1200,900'],
+    binary: process.env.CHROME_BIN
+  }
+};
+
+config.onPrepare = function () {
+  defaultPrepare.apply(this, arguments);
+  var junitReporter = new JUnitXmlReporter({
+    savePath: require('path').join(__dirname, './../junit'),
+    consolidateAll: true,
+    filePrefix: 'TESTS-e2e'
+  });
+  jasmine.getEnv().addReporter(junitReporter);
+};
+
+exports.config = config;

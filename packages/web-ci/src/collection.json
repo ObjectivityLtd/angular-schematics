@@ -10,12 +10,14 @@
     "azure-devops": {
       "description": "Adds configuration of Azure DevOps pipeline configuration",
       "factory": "./azure-devops/index#azureDevOps",
-      "schema": "./azure-devops/schema.json"
+      "schema": "./azure-devops/schema.json",
+      "hidden": true
     },
     "karma": {
       "description": "Change karma configuration",
       "factory": "./karma/index#karma",
-      "schema": "./karma/schema.json"
+      "schema": "./karma/schema.json",
+      "hidden": true
     }
   }
 }

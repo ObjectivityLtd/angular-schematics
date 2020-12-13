@@ -1,0 +1,42 @@
+module.exports = function (config) {
+  config.set({
+    junitReporter: {
+      outputDir: '<%= junitReporterOutputDir %>', 
+      consolidateAll: true,
+      outputFile: 'TESTS-unittests.xml',
+      useBrowserName: false
+    },
+    basePath: '',
+    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-coverage'),
+      require('karma-junit-reporter'),
+      require('@angular-devkit/build-angular/plugins/karma')
+    ],
+    client: {
+      clearContext: false
+    },
+    coverageReporter: {
+      dir: require('path').join(__dirname, '<%= coverageReporterOutputDir %>'),
+      subdir: '.',
+      reporters: [{ type: 'cobertura' }
+      ],
+    },
+    reporters: ['progress', 'junit'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_ERROR,
+    autoWatch: false,
+    browsers: ['ChromeHeadlessCI'],
+    singleRun: true,
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
+    restartOnFileChange: false
+  });
+};

@@ -21,7 +21,8 @@ describe(`azure-devops`, () => {
     it(`should add azure-pipelines.yml`, async () => {
         const tree = await testRunner.runSchematicAsync('azure-devops', { project: projectName, workingDir: 'path' }, appTree).toPromise();
         expectFileContent(tree, '/azure-pipelines.yml', ` workingDir: 'path'`);
-        expectFileContent(tree, '/azure-pipelines.yml', `summaryFileLocation: 'path/coverage/sandbox/cobertura-coverage.xml'`);
+        expectFileContent(tree, '/azure-pipelines.yml', `name: Sandbox Angular App $(BuildID)`);
+        expectFileContent(tree, '/azure-pipelines.yml', `summaryFileLocation: '$(Build.SourcesDirectory)/coverage/sandbox/cobertura-coverage.xml'`);
         expectFileContent(tree, '/azure-pipelines.yml', `rootFolderOrFile: 'path/dist/sandbox'`);
         expectFileContent(tree, '/azure-pipelines.yml', `archiveFile: '$(Build.ArtifactStagingDirectory)/sandbox.zip'`);
         expectFileContent(tree, '/azure-pipelines.yml', `ArtifactName: 'sandbox'`);
