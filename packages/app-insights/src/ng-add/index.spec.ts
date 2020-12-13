@@ -68,7 +68,6 @@ describe(`app-insights`, () => {
             const options = { instrumentationKey: 'instrumentationKey', project: 'sandbox', skipInstall: false };
 
             const tree = await testRunner.runSchematicAsync<Schema>('ng-add', options, appTree).toPromise();
-            //assertRunSchematicTask<Schema>(testRunner.tasks, 'monitoring-module', { ...options, ... { skipCoreModule: true } });
             const content = getFileContentAsLineCollection(tree, '/src/app/core/core.module.ts');
             expect(content).toEqual(
                 [`import { NgModule } from '@angular/core';`,
