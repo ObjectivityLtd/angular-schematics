@@ -1,4 +1,4 @@
-import { createSandboxAsync, getFileContent } from '@objectivity/angular-schematic-utils/testing';
+import { createSandboxAsync, createSandboxWorkspaceAsync, getFileContent } from '@objectivity/angular-schematic-utils/testing';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
 const collectionPath = path.join(__dirname, '../collection.json');
@@ -26,7 +26,23 @@ describe(`azure-devops`, () => {
         expectFileContent(tree, '/azure-pipelines.yml', `rootFolderOrFile: 'path/dist/sandbox'`);
         expectFileContent(tree, '/azure-pipelines.yml', `archiveFile: '$(Build.ArtifactStagingDirectory)/sandbox.zip'`);
         expectFileContent(tree, '/azure-pipelines.yml', `ArtifactName: 'sandbox'`);
+        expectFileContent(tree, '/azure-pipelines.yml', `customCommand: 'run ng lint sandbox'`);
+        expectFileContent(tree, '/azure-pipelines.yml', `npm run ng e2e sandbox -- --protractor-config=e2e/protractor-ci.conf.js`);
+        expectFileContent(tree, '/azure-pipelines.yml', `run ng test sandbox -- --karma-config=karma-ci.conf.js --code-coverage --no-progress --source-map=false`);
+        expectFileContent(tree, '/azure-pipelines.yml', `run ng build sandbox -- --prod --aot -vc -cc --buildOptimizer --progress=false`);
+        //expectFileContent(tree, '/azure-pipelines.yml', `npm run ng e2e sandbox -- --protractor-config=projects/sandbox/e2e/protractor-ci.conf.js`);
     });
+
+    describe(`for multiple projects`, () => {
+        beforeEach(async () => {
+            appTree = await createSandboxWorkspaceAsync(testRunner);
+        });
+        it(`should add azure-pipelines.yml`, async () => {
+            const tree = await testRunner.runSchematicAsync('azure-devops', { project: projectName, workingDir: 'path' }, appTree).toPromise();
+            expectFileContent(tree, '/azure-pipelines.yml', `npm run ng e2e sandbox -- --protractor-config=projects/sandbox/e2e/protractor-ci.conf.js`);
+            expectFileContent(tree, '/azure-pipelines.yml', `run ng test sandbox -- --karma-config=projects/sandbox/karma-ci.conf.js --code-coverage --no-progress --source-map=false`);
+        });
+    });  
 });
 
 function expectFileContent(tree: Tree, filePath: string, expectedContent: string) {

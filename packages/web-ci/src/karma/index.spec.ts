@@ -58,9 +58,6 @@ describe(`karma`, () => {
     it(`should add new scripts to package.json`, async () => {
         const tree = await testRunner.runSchematicAsync('karma', { project: projectName }, appTree).toPromise();
         expectFileContent(tree, '/package.json', `"install-puppeteer": "cd node_modules/puppeteer && npm run install"`);
-        expectFileContent(tree, '/package.json', `"build:ci": "ng build --prod --aot -vc -cc --buildOptimizer",`);
-        expectFileContent(tree, '/package.json', `"e2e:ci": "npm run install-puppeteer && ng e2e --protractor-config=e2e/protractor-ci.conf.js",`);
-        expectFileContent(tree, '/package.json', `"test:ci": "ng test --karma-config=karma-ci.conf.js --code-coverage --no-progress --source-map=false"`);
     });
     
     describe(`for multiple projects`, () => {

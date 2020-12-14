@@ -22,23 +22,26 @@ steps:
     command: custom
     workingDir: '<%= workingDir %>'
     verbose: false
-    customCommand: 'run build:ci'
+    customCommand: 'run ng build <%= project %> -- --prod --aot -vc -cc --buildOptimizer --progress=false'
 
 - task: Npm@1
   displayName: 'Run Unit Tests'
   inputs:
     command: custom
     workingDir: '<%= workingDir %>'
-    customCommand: 'run test:ci'
+    customCommand: 'run ng test <%= project %> -- --karma-config=<%= karmaConfigPath %> --code-coverage --no-progress --source-map=false'
     verbose: false
+  continueOnError: true
 
-- task: Npm@1
+- task: Bash@3
   displayName: 'Run E2E Tests'
   inputs:
-    command: custom
-    customCommand: 'run e2e:ci'
-    workingDir: '<%= workingDir %>'
-    verbose: false
+    targetType: 'inline'
+    script: |
+      npm run install-puppeteer
+      npm run ng e2e <%= project %> -- --protractor-config=<%= protractorConfigPath %>
+    workingDirectory: '<%= workingDir %>'
+  continueOnError: true
 
 - task: PublishTestResults@2
   displayName: 'Publish Tests Results'
@@ -46,12 +49,13 @@ steps:
     testResultsFormat: JUnit
     testResultsFiles: '$(Build.SourcesDirectory)/junit/**/*.xml'
     mergeTestResults: true
+    failTaskOnFailedTests: true
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish Code Coverage'
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/sandbox/cobertura-coverage.xml'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/<%= project %>/cobertura-coverage.xml'
 
 - task: Npm@1
   displayName: 'Run Code Analysis'
@@ -59,7 +63,7 @@ steps:
     command: custom
     workingDir: '<%= workingDir %>' 
     verbose: false
-    customCommand: 'run lint'
+    customCommand: 'run ng lint <%= project %>'
   continueOnError: true
 
 - task: ArchiveFiles@2
