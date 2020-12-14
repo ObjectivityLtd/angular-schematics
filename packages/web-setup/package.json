@@ -1,6 +1,6 @@
 {
   "name": "@objectivity/angular-schematic-web-setup",
-  "version": "10.2.0",
+  "version": "11.0.0",
   "description": "Configures useful aspects of Angular project.",
   "repository": "ObjectivityLtd/angular-schematics",
   "bugs": {
@@ -24,7 +24,7 @@
   "dependencies": {
     "@angular-devkit/core": "^11.0.3",
     "@angular-devkit/schematics": "^11.0.3",
-    "@objectivity/angular-schematic-utils": "^10.2.0",
+    "@objectivity/angular-schematic-utils": "^11.0.0",
     "schematics-utilities": "^2.0.1",
     "typescript": "~4.0.2"
   },

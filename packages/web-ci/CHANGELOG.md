@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.2.0...v11.0.0) (2020-12-14)
+
+
+### Bug Fixes
+
+* azure pipeline for multiple projects ([1adf57c](https://github.com/ObjectivityLtd/angular-schematics/commit/1adf57cb5f4a22e05f0accf58a68f00d6a9f1bf1))
+
+
+### Features
+
+* add e2e tests to azure pipeline ([f26b2f5](https://github.com/ObjectivityLtd/angular-schematics/commit/f26b2f59ba6c580bc92c1ebfee04b959449366a5))
+
+
+
+
+
+
 # [10.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.1.3...v10.2.0) (2020-12-06)
 
 **Note:** Version bump only for package @objectivity/angular-schematic-web-ci

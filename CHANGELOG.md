@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.2.0...v11.0.0) (2020-12-14)
+
+
+### Bug Fixes
+
+* azure pipeline for multiple projects ([1adf57c](https://github.com/ObjectivityLtd/angular-schematics/commit/1adf57cb5f4a22e05f0accf58a68f00d6a9f1bf1))
+* fix  addModuleImportToRootModule method ([c9ea0c9](https://github.com/ObjectivityLtd/angular-schematics/commit/c9ea0c9981ea707d44fb476d8a686f24a9e6f7e9))
+* fix debugging unit tests ([874963d](https://github.com/ObjectivityLtd/angular-schematics/commit/874963d090bba27f2b87ea9b326e96499096daed))
+* fix importing core module to root module ([f002060](https://github.com/ObjectivityLtd/angular-schematics/commit/f002060955b197d9e7803db0c633c619f678908c))
+* fix schema definition ([894d783](https://github.com/ObjectivityLtd/angular-schematics/commit/894d7838b7259a71cc079a61b82d05e53dd66961))
+
+
+### Features
+
+* add e2e tests to azure pipeline ([f26b2f5](https://github.com/ObjectivityLtd/angular-schematics/commit/f26b2f59ba6c580bc92c1ebfee04b959449366a5))
+* adds functions for unit tests ([c9eac9a](https://github.com/ObjectivityLtd/angular-schematics/commit/c9eac9a02038dd5b2e182444e739e2e65f6a43c7))
+* moves JSONFile class to utils project ([08f5a6a](https://github.com/ObjectivityLtd/angular-schematics/commit/08f5a6a380ea132b384810fe70a1edfdf0527fd5))
+
+
+
+
+
+
 # [10.2.0](https://github.com/ObjectivityLtd/angular-schematics/compare/v10.1.3...v10.2.0) (2020-12-06)
 
 
