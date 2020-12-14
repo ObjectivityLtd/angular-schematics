@@ -18,7 +18,7 @@ config.capabilities = {
 config.onPrepare = function () {
   defaultPrepare.apply(this, arguments);
   var junitReporter = new JUnitXmlReporter({
-    savePath: require('path').join(__dirname, './../junit'),
+    savePath: require('path').join(__dirname, '<%= junitReporterOutputDir %>'),
     consolidateAll: true,
     filePrefix: 'TESTS-e2e'
   });
